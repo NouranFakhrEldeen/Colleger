@@ -48,7 +48,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseContext.cs" />
+    <Compile Include="Entities\Division.cs" />
+    <Compile Include="Entities\Faculty.cs" />
+    <Compile Include="Entities\Interest.cs" />
+    <Compile Include="Entities\Recommendation.cs" />
+    <Compile Include="Entities\SearchHistory.cs" />
+    <Compile Include="Entities\Specialization.cs" />
+    <Compile Include="Entities\Student.cs" />
+    <Compile Include="Entities\Tansiq.cs" />
+    <Compile Include="Entities\University.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Migrations\201904131428208_v0.1.cs" />
+    <Compile Include="Migrations\201904131428208_v0.1.Designer.cs">
+      <DependentUpon>201904131428208_v0.1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -56,7 +70,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Migrations\" />
+    <EmbeddedResource Include="Migrations\201904131428208_v0.1.resx">
+      <DependentUpon>201904131428208_v0.1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

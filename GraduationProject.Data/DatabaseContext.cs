@@ -20,5 +20,6 @@ namespace GraduationProject.Data
         }
 
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Division> Division { get; set; }
     }
 }

@@ -56,7 +56,7 @@ namespace GraduationProject.MVC.Controllers
             var userCms = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier , user.Id.ToString()),
-                new Claim (ClaimTypes.Name , user.Name),
+                new Claim (ClaimTypes.Name , user.Firstname),
                 new Claim(ClaimTypes.Email, user.Email),
                 
 
