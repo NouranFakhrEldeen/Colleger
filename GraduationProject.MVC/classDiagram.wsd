@@ -1,0 +1,117 @@
+﻿@startuml class_Diagram
+title Models
+skinparam monochrome true
+skinparam linetype ortho
+left to right direction
+
+
+class User {
+    email
+    password
+    firstname
+    lastname
+    role: enum
+}
+hide User methods
+
+class Specialization {
+    name
+}
+hide Specialization methods
+
+class Student {
+    user: User
+    specialization: Specialization
+    grade
+    street
+    city
+    governorate
+}
+hide Student methods
+Student -- Specialization
+Student -- User
+
+
+class University {
+    name
+    zipcode
+    street
+    city
+    governorate
+    logo
+    description
+    views
+    addedBy: User
+}
+hide University methods
+University *-- User
+
+class Faculty {
+    name
+    description
+    logo
+    University: University
+    specializations: Array<Specialization>
+    tansiqs: Array<Tansiq>
+    searchAppearancesCount
+    addedBy: User
+}
+hide Faculty methods
+Faculty *-- University
+Faculty *-- User
+Faculty --* Tansiq
+
+class Tansiq {
+    from
+    to
+    actual
+    specialization: Specialization
+}
+
+class Division {
+    faculty: Faculty
+    name
+    description
+    itansiqs: Array<Tansiq>
+    extraInfo
+    specializations: Array<Specialization>
+    views
+    interests: Array<Interest>
+    addedBy: User
+}
+hide Division methods
+Division *-- Faculty
+Division *--* Interest
+Division *-- User
+Division --* Tansiq
+
+class Recommendation {
+    division: Division
+    searchHistory: SearchHistory
+    savedForStudent: User
+}
+hide Recommendation methods
+Recommendation -- Division
+Recommendation *-- SearchHistory
+Recommendation *-- User
+
+class SearchHistory {
+    specialization: Specialization
+    governorate
+    grade
+    timestamp
+    anonymous: Boolean
+    interests: Array<Interest>
+}
+hide SearchHistory methods
+SearchHistory -- Specialization
+SearchHistory *--* Interest
+
+class Interest {
+    name
+    addedBy: User
+}
+hide Interest methods
+Interest *-- User
+
+@enduml
