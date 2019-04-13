@@ -4,13 +4,23 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - COLEGER</title>
+
     @Styles.Render("~/Content/css")
+    <link rel="stylesheet" href="@Url.Content("~/Content/bootstrap-tags-input.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/typeahead.css")" />
     @Scripts.Render("~/bundles/modernizr")
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script src="@Url.Content("~/Scripts/popper.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/typeahead.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap-tags-input.js")" type="text/javascript"></script>
 </head>
 <body class="">
     <nav class="navbar navbar-expand-lg navbar-light bg-light nav-border">
         <img src="~/Images/logo-color.png" width="40" height="40" class="d-inline-block align-top" alt="">
-        <a class="navbar-brand clr-primary" href="#"><strong>COLEGER</strong></a>
+        <a class="navbar-brand clr-primary" href="#"><strong>COLLEGER</strong></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -39,9 +49,5 @@
             <p>&copy; @DateTime.Now.Year - COLEGER</p>
         </footer>
     </div>
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
 </body>
 </html>
