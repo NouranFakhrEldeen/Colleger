@@ -1,0 +1,55 @@
+﻿@using GraduationProject.MVC.Models
+@model LoginViewModel
+@{
+    Layout = "";
+}
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/Site.css" rel="stylesheet" />
+<link href="~/Content/Login.css" rel="stylesheet" />
+
+
+<body style="background-image:url('../../Images/bg1.jpg');background-repeat:no-repeat;
+background-size:cover;">
+
+    <div class="container">
+        <div class="form-signin bg-gradient-dark text-dark">
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+            {
+                <div class="text-center mb-4">
+                    <img class="mb-4 w-25" src="~/Images/whiteBgLogo.svg" alt="">
+                    <p class="display-4 ">Graduation Project </p>
+                </div>
+
+                <div class="form-label-group">
+
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control ", id = "inputEmail", placeholder = "Email address" })
+                    <label for="inputEmail">Email address</label>
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-label-group">
+
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control ", id = "inputPassword", placeholder = "Password" })
+                    <label for="inputPassword">Password</label>
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+
+                </div>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="checkbox mb-3">
+
+                    @Html.CheckBoxFor(m => m.RememberMe)
+                    @Html.LabelFor(m => m.RememberMe)
+                </div>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                @*<input type="submit" value="Log in" class="btn btn-primary btn-block" />*@
+
+            }
+
+        </div>
+    </div>
+</body>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
