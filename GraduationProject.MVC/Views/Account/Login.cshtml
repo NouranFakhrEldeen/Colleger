@@ -5,43 +5,46 @@
 }
 
 
-    <div class="container min-vh-100">
-        <div class="row">
-            <div class="form-signin bg-gradient-dark text-dark col-md-4 offset-md-4 col-12">
-                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
-                {
-                    <div class="text-center mb-4">
-                        <img class=" w-50" src="~/Images/logo-color.png" alt="">
-                        <p class="display-4 ">COLLEGER</p>
-                    </div>
-                    <h4>Login</h4>
-                    <div class="form-label-group">
-                        <label for="inputEmail">Email address</label>
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control ", id = "inputEmail", placeholder = "Email address" })
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                    </div>
+<div class="container min-vh-100">
+    <div class="row">
+        <div class="form-signin bg-gradient-dark text-dark col-md-4 offset-md-4 col-12">
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+            {
+                <div class="text-center mb-4">
+                    <img class=" w-50" src="~/Images/logo-color.png" alt="">
+                    <p class="display-4 ">COLLEGER</p>
+                </div>
+                <h4>Login</h4>
+                <div class="form-label-group">
+                    <label for="inputEmail">Email address</label>
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control ", id = "inputEmail", placeholder = "Email address" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                </div>
 
-                    <div class="form-label-group">
-                        <label for="inputPassword">Password</label>
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control ", id = "inputPassword", placeholder = "Password" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                <div class="form-label-group">
+                    <label for="inputPassword">Password</label>
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control ", id = "inputPassword", placeholder = "Password" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
 
-                    </div>
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                </div>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                    <div class="checkbox mb-3">
+                <div class="checkbox mb-3">
 
-                        @Html.CheckBoxFor(m => m.RememberMe)
-                        @Html.LabelFor(m => m.RememberMe)
-                    </div>
-                    <button class="btn btn-lg btn-primary bg-clr-primary btn-block" type="submit">Sign in</button>
-                    @*<input type="submit" value="Log in" class="btn btn-primary btn-block" />*@
+                    @Html.CheckBoxFor(m => m.RememberMe)
+                    @Html.LabelFor(m => m.RememberMe)
+                </div>
+                <button class="btn btn-lg btn-primary bg-clr-primary btn-block" type="submit">Sign in</button>
+                @*<input type="submit" value="Log in" class="btn btn-primary btn-block" />*@
+                <div class="text-center">
 
-                }
+                    <p> Not registered? <a href="@Url.Action("Register","Account") " class="clr-primary">Create an account</a></p>
+                </div>
+            }
 
-            </div>
         </div>
     </div>
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

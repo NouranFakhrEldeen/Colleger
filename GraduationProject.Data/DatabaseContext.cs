@@ -21,5 +21,13 @@ namespace GraduationProject.Data
 
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Division> Division { get; set; }
+
+        public System.Data.Entity.DbSet<GraduationProject.Data.Entities.Interest> Interests { get; set; }
+
+        public System.Data.Entity.DbSet<GraduationProject.Data.Entities.University> Universities { get; set; }
+
+        public System.Data.Entity.DbSet<GraduationProject.Data.Entities.Faculty> Faculties { get; set; }
+
+        public System.Data.Entity.DbSet<GraduationProject.Data.Entities.Specialization> Specializations { get; set; }
     }
 }

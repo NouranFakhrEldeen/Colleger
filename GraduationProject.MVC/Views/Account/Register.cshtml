@@ -1,0 +1,77 @@
+﻿@using GraduationProject.MVC.Models
+@model CreateUserModel
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container min-vh-100">
+    <div class="row">
+        <div class="form-signin bg-gradient-dark text-dark col-md-4 offset-md-4 col-12">
+            @using (Html.BeginForm("Register", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+            {
+                <div class="text-center mb-4">
+                    <img class=" w-50" src="~/Images/logo-color.png" alt="">
+                    <p class="display-4 ">COLLEGER</p>
+                </div>
+                <h4>Register</h4>
+                <div class="form-label-group mb-2">
+
+                    @Html.TextBoxFor(m => m.Firstname, new { @class = "form-control ", id = "inputFirstname", placeholder = "First name" })
+                    @Html.ValidationMessageFor(m => m.Firstname, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-label-group mb-2">
+
+                    @Html.TextBoxFor(m => m.Lastname, new { @class = "form-control ", id = "inputLastname", placeholder = "Last name" })
+                    @Html.ValidationMessageFor(m => m.Lastname, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-label-group mb-2">
+
+                    @Html.TextBoxFor(m => m.Grade, new { @class = "form-control ", placeholder = "Grade" })
+                    @Html.ValidationMessageFor(m => m.Grade, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-label-group mb-2">
+
+                    @Html.TextBoxFor(m => m.Street, new { @class = "form-control ", placeholder = "Street" })
+                    @Html.ValidationMessageFor(m => m.Street, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-label-group mb-2">
+
+                    @Html.TextBoxFor(m => m.City, new { @class = "form-control ", placeholder = "City" })
+                    @Html.ValidationMessageFor(m => m.City, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-label-group mb-2">
+
+                    @Html.TextBoxFor(m => m.Governorate, new { @class = "form-control ", placeholder = "Governorate" })
+                    @Html.ValidationMessageFor(m => m.Governorate, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group mb-2">
+                    @Html.DropDownList("SpecializationId", (IEnumerable<SelectListItem>)ViewBag.SpecializationId,"Please select your Specialization ", htmlAttributes: new { @class = "form-control", placeholder = "SpecializationId" })
+                    @Html.ValidationMessageFor(model => model.SpecializationId, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-label-group mb-2">
+
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control ", placeholder = "Email address" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-label-group mb-2">
+
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control ", placeholder = "Password" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+
+                </div>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                <button class="btn btn-lg btn-primary bg-clr-primary btn-block" type="submit">Register</button>
+                @*<input type="submit" value="Log in" class="btn btn-primary btn-block" />*@
+
+            }
+
+        </div>
+    </div>
+</div>
+
+

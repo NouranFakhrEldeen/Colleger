@@ -8,6 +8,7 @@
     @Styles.Render("~/Content/css")
     <link rel="stylesheet" href="@Url.Content("~/Content/bootstrap-tags-input.css")" />
     <link rel="stylesheet" href="@Url.Content("~/Content/typeahead.css")" />
+    
     @Scripts.Render("~/bundles/modernizr")
 
     @Scripts.Render("~/bundles/jquery")
@@ -20,7 +21,7 @@
 <body class="">
     <nav class="navbar navbar-expand-lg navbar-light bg-light nav-border">
         <img src="~/Images/logo-color.png" width="40" height="40" class="d-inline-block align-top" alt="">
-        <a class="navbar-brand clr-primary" href="#"><strong>COLLEGER</strong></a>
+        <a class="navbar-brand clr-primary" href="@Url.Action("Index", "Home")"><strong>COLLEGER</strong></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -28,26 +29,35 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="@Url.Action("Index", "Home")">Home <span class="sr-only">(current)</span></a>
+                </li>
+                @if (User.IsInRole("admin"))
+                { }
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Dashboard
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="@Url.Action("Index", "Universities")">Universities</a>
+                        <a class="dropdown-item" href="@Url.Action("Index", "Faculties")">Faculties</a>
+                        <a class="dropdown-item" href="@Url.Action("Index", "Division")"> Division </a>
+                        <a class="dropdown-item" href="@Url.Action("Index", "Interests")"> Interests </a>
+                    </div>
                 </li>
             </ul>
-            <ul class="navbar-nav user-nav">
 
-                <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("Login", "Account")" >Login <span class="sr-only">(current)</span></a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("Register", "Account")">Register <span class="sr-only">(current)</span></a>
-                </li>
-            </ul>
+            @Html.Partial("_LoginPartial")
         </div>
     </nav>
     <div class="body-content">
+       
+
         @RenderBody()
-        <footer class="text-light text-center text-capitalize bg-clr-primary footer">
-            <p>&copy; @DateTime.Now.Year - COLEGER</p>
-        </footer>
+        
+
     </div>
+    <footer class="text-light text-center text-capitalize bg-clr-primary footer mt-auto py-3">
+        <p>&copy; @DateTime.Now.Year - COLEGER</p>
+    </footer>
 </body>
 </html>

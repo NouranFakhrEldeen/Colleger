@@ -23,7 +23,7 @@ namespace GraduationProject.MVC.Controllers
         public ActionResult Login(string returnUrl)
         {
             if (User.Identity.IsAuthenticated)
-                return RedirectToAction("Index", "Tasks");
+                return RedirectToAction("Index", "Home");
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -50,6 +50,51 @@ namespace GraduationProject.MVC.Controllers
 
             Authenticate(user, false);
             return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult Register(string returnUrl)
+        {
+            if (User.Identity.IsAuthenticated)
+                return RedirectToAction("Index", "Tasks");
+            ViewBag.ReturnUrl = returnUrl;
+            ViewBag.SpecializationId = new SelectList(db.Specializations, "Id", "Name");
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Register(CreateUserModel user)
+        {
+            if(user != null)
+            {
+                Student entity = new Student()
+                {
+                    Email = user.Email,
+                    Firstname = user.Firstname,
+                    Lastname = user.Lastname,
+                    Password = user.Password,
+                    City = user.City,
+                    Governorate = user.Governorate,
+                    Street=  user.Street,
+                    Grade = user.Grade ,
+                    SpecializationId = user.SpecializationId
+                    
+                    
+
+                };
+                db.Users.Add(entity);
+                db.SaveChanges();
+                
+                return RedirectToAction("Index", "Home");
+            }
+            return View(user);
+        }
+
+        [HttpPost]
+
+        public ActionResult LogOff()
+        {
+            IAuthenticationManager authenticationManager = HttpContext.GetOwinContext().Authentication;
+            authenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            return RedirectToAction("Login", "Account");
         }
         private List<Claim> GetClaims(User user)
         {
