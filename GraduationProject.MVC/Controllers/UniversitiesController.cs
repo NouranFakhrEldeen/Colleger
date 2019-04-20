@@ -52,6 +52,10 @@ namespace GraduationProject.MVC.Controllers
             if (university == null)
             {
                 return HttpNotFound();
+            } else
+            {
+                university.Views = university.Views + 1;
+                db.SaveChanges();
             }
             return View(university);
         }
