@@ -1,4 +1,5 @@
-﻿@model IEnumerable<GraduationProject.Data.Entities.University>
+﻿
+@model IEnumerable<GraduationProject.Data.Entities.University>
 
 @{
     ViewBag.Title = "Index";
@@ -7,20 +8,16 @@
    
 
 <div class="container">
-    <div class="row">
-        <div class="col-10 " >
+    <div class="row my-2">
+        <div class="col-10" >
             <h2 class="clr-secondary"> Universities </h2>
         </div>
-        <div class="col-2 p-2">
-            @*<p>
-                @Html.ActionLink("Create New", "Create")
-            </p>*@
-            
-                <a href="@Url.Action("Create", "Universities")"  class="btn btn-lg btn-primary bg-clr-primary "> Create New</a>          
+        <div class="col-2">
+            <a href="@Url.Action("Create", "Universities")"  class="btn btn-lg btn-primary bg-clr-primary "> Create New</a>          
         </div>
         </div>
 
-
+    <div>
         <table class="table">
             <thead class="thead-dark">
 
@@ -55,9 +52,16 @@
             </thead>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        <img src="/Universities/RetrieveImage/@item.Id" alt="" height=100 width=200 />
+                <tr class="my-2">
+                    <td class="font-3rem text-center clr-secondary bg-light p-0 lh-100px">
+                        @if (item.Logo != null)
+                        {
+                            <img src="/Universities/RetrieveImage/@item.Id" alt="" height=100 width=200 />
+                        }
+                        else
+                        {
+                            <i class="fas fa-university clr-secondary"></i>
+                        }
 
                     </td>
                     <td>
@@ -92,4 +96,5 @@
             }
 
         </table>
+    </div>
     </div>
