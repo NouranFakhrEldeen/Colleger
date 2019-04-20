@@ -12,7 +12,11 @@ namespace GraduationProject.MVC
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
+            routes.MapRoute("api/interests", "api/interests", new
+            {
+                controller = "Interests",
+                action = "API"
+            });
             routes.MapRoute(
                name: "Default",
                url: "{controller}/{action}/{id}",

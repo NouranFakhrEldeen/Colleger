@@ -45,7 +45,7 @@
                 <div class="form-group">
                     <label for="interests">Your Interests</label>
                     <div class="input-group border rounded bg-white">
-                        <input name="interestInput" data-role="interestInput" type="text" class="form-control" id="interestsInput" placeholder="Ex: Drawaing, Litrature...">
+                        <input type="text" name="interests" class="form-control" InterestSelector placeholder="Ex: Drawaing, Litrature...">
                     </div>
                 </div>
                 <div class="row">
@@ -57,27 +57,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    var cities = new Bloodhound({
-        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('text'),
-        queryTokenizer: Bloodhound.tokenizers.whitespace,
-        prefetch: "@Url.Content("~/Scripts/cities.json")"
-    });
-    cities.initialize();
-
-    var elt = $('#interestsInput');
-    elt.tagsinput({
-        itemValue: 'value',
-        itemText: 'text',
-
-        typeaheadjs: {
-            name: 'interestInput',
-            displayKey: 'text',
-            highlight: true,
-            hint: false,
-            source: cities.ttAdapter()
-        }
-    });
-
-</script>

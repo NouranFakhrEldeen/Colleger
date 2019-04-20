@@ -124,5 +124,14 @@ namespace GraduationProject.MVC.Controllers
             }
             base.Dispose(disposing);
         }
+
+
+        [HttpGet]
+        [ActionName("API")]
+        public ActionResult getAll()
+        {
+            var interests = db.Interests.Select(i => new { i.Id, i.name }).ToList();
+            return Json(interests,JsonRequestBehavior.AllowGet);
+        }
     }
 }
