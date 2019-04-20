@@ -58,9 +58,9 @@
     <Compile Include="Entities\Tansiq.cs" />
     <Compile Include="Entities\University.cs" />
     <Compile Include="Entities\User.cs" />
-    <Compile Include="Migrations\201904131428208_v0.1.cs" />
-    <Compile Include="Migrations\201904131428208_v0.1.Designer.cs">
-      <DependentUpon>201904131428208_v0.1.cs</DependentUpon>
+    <Compile Include="Migrations\201904201052361_v0.1.cs" />
+    <Compile Include="Migrations\201904201052361_v0.1.Designer.cs">
+      <DependentUpon>201904201052361_v0.1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -70,8 +70,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201904131428208_v0.1.resx">
-      <DependentUpon>201904131428208_v0.1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201904201052361_v0.1.resx">
+      <DependentUpon>201904201052361_v0.1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

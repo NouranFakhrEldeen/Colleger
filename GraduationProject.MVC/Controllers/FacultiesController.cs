@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -21,6 +22,27 @@ namespace GraduationProject.MVC.Controllers
             var faculties = db.Faculties.Include(f => f.University);
             return View(faculties.ToList());
         }
+        public ActionResult RetrieveImage(int id)
+        {
+            byte[] cover = GetImageFromDataBase(id);
+            if (cover != null)
+            {
+                return File(cover, "image/jpg");
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+
+        public byte[] GetImageFromDataBase(int Id)
+        {
+            var q = from temp in db.Faculties where temp.Id == Id select temp.logo;
+            byte[] cover = q.First();
+            return cover;
+        }
+
 
         // GET: Faculties/Details/5
         public ActionResult Details(int? id)
@@ -53,6 +75,8 @@ namespace GraduationProject.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
+                HttpPostedFileBase file = Request.Files["ImageData"];
+                faculty.logo = ConvertToBytes(file);
                 db.Faculties.Add(faculty);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -60,6 +84,13 @@ namespace GraduationProject.MVC.Controllers
 
             ViewBag.UniversityId = new SelectList(db.Universities, "Id", "Name", faculty.UniversityId);
             return View(faculty);
+        }
+        public byte[] ConvertToBytes(HttpPostedFileBase Logo)
+        {
+            byte[] imageBytes = null;
+            BinaryReader reader = new BinaryReader(Logo.InputStream);
+            imageBytes = reader.ReadBytes((int)Logo.ContentLength);
+            return imageBytes;
         }
 
         // GET: Faculties/Edit/5

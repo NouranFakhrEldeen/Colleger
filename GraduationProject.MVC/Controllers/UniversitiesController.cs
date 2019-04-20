@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -19,6 +20,25 @@ namespace GraduationProject.MVC.Controllers
         public ActionResult Index()
         {
             return View(db.Universities.ToList());
+        }
+        public ActionResult RetrieveImage(int id)
+        {
+            byte[] cover = GetImageFromDataBase(id);
+            if (cover != null)
+            {
+                return File(cover, "image/jpg");
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public byte[] GetImageFromDataBase(int Id)
+        {
+            var q = from temp in db.Universities where temp.Id == Id select temp.Logo;
+            byte[] cover = q.First();
+            return cover;
         }
 
         // GET: Universities/Details/5
@@ -47,16 +67,26 @@ namespace GraduationProject.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Zipcode,Street,City,Governorate,Logo,Description,Views")] University university)
+        public ActionResult Create(University university)
         {
             if (ModelState.IsValid)
             {
+                HttpPostedFileBase file = Request.Files["ImageData"];
+                university.Logo = ConvertToBytes(file);
                 db.Universities.Add(university);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             return View(university);
+        }
+       
+        public byte[] ConvertToBytes(HttpPostedFileBase Logo)
+        {
+            byte[] imageBytes = null;
+            BinaryReader reader = new BinaryReader(Logo.InputStream);
+            imageBytes = reader.ReadBytes((int)Logo.ContentLength);
+            return imageBytes;
         }
 
         // GET: Universities/Edit/5

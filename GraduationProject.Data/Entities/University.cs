@@ -17,7 +17,7 @@ namespace GraduationProject.Data.Entities
         public string Street { get; set; }
         public string City { get; set; }
         public string Governorate { get; set; }
-        public string Logo { get; set; }
+        public byte[] Logo { get; set; }
         public string Description { get; set; }
         public int Views { get; set; }
 
