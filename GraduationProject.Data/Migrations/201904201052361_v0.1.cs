@@ -29,7 +29,7 @@ namespace GraduationProject.Data.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(),
                         Description = c.String(),
-                        logo = c.String(),
+                        logo = c.Binary(),
                         searchAppearancesCount = c.Int(nullable: false),
                         UniversityId = c.Int(nullable: false),
                     })
@@ -76,7 +76,7 @@ namespace GraduationProject.Data.Migrations
                         Street = c.String(),
                         City = c.String(),
                         Governorate = c.String(),
-                        Logo = c.String(),
+                        Logo = c.Binary(),
                         Description = c.String(),
                         Views = c.Int(nullable: false),
                     })

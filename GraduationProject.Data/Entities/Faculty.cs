@@ -14,7 +14,7 @@ namespace GraduationProject.Data.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public string logo { get; set; }
+        public byte[] logo { get; set; }
         public int searchAppearancesCount { get; set; }
         [ForeignKey("University")]
         public int UniversityId { get; set; }
