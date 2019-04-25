@@ -13,5 +13,10 @@ namespace GraduationProject.MVC.Controllers
         {
             return View();
         }
+
+        public ActionResult Result()
+        {
+            return View();
+        }
     }
 }
