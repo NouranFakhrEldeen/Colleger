@@ -5,67 +5,100 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
+
+<div class="container container-md-fluid">
 
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Division</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+    <div class="row mt-2">
+
+        @using (Html.BeginForm("Create", "Division", FormMethod.Post, new { enctype = "multipart/form-data", @class = "col-lg-8 offset-lg-2 col-md-12 offset-md-0" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form bg-light rounded-lg border p-3">
+                <h4 class="text-center py-1 my-1">Division</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.ExtraInfo, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.ExtraInfo, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ExtraInfo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <label for="UniversityId" class="control-label col-md-2">University</label>
+                    <div class="col-md-10">
+                        @Html.DropDownList("UniversityId", null, htmlAttributes: new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="FacultyId" class="control-label col-md-2">Faculty</label>
+                    <div class="col-md-10">
+                        <select class="form-control" name="FacultyId" id="FacultyId"></select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="interests" class="control-label col-md-2">Interests</label>
+                    <div class="input-group col-md-10">
+                        <input type="text" name="interests" class="form-control" InterestSelector placeholder="Ex: Drawaing, Litrature...">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-12 col-md-6 offset-md-3 col-lg-4 offset-lg-4">
+                        <input type="submit" value="Create" class="btn btn-lg btn-primary bg-clr-primary text-center w-100" />
+                    </div>
+                </div>
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ExtraInfo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ExtraInfo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ExtraInfo, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Views, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Views, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Views, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.FacultyId, "FacultyId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("FacultyId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.FacultyId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
+        }
     </div>
-}
+</div>
+<script>
+    let $universityField = $('#UniversityId');
+    $universityField.change(event => {
+        let id = event.target.value;
+        fetchFaculties(id);
+    });
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+    fetchFaculties($universityField.val());
+
+    function fetchFaculties(id) {
+        $.get('/api/faculties/' + id).done(result => {
+            console.log('done', result);
+            let $facultiesList = $('#FacultyId');
+            $facultiesList.empty();
+            for (const i of result) {
+                $facultiesList.append($(`<option value="${i.Id}">${i.Name}</option>`));
+            }
+        }).catch(err => {
+            console.log('err', err);
+        })
+    }
+</script>
+<div class="row my-2">
+    <div class="col text-center">
+        @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "btn btn-sm btn-primary bg-clr-secondary" })
+    </div>
 </div>
 
 @section Scripts {

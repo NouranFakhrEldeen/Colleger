@@ -152,6 +152,14 @@ namespace GraduationProject.MVC.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        [ActionName("API")]
+        public ActionResult getAllByUniversityId(int id)
+        {
+            var faculties = db.Faculties.Where(i => i.UniversityId == id).Select(i => new { i.Id, i.Name });
+            return Json(faculties, JsonRequestBehavior.AllowGet);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
