@@ -1,59 +1,64 @@
-﻿
+﻿@model GraduationProject.Data.Entities.Tansiq
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@using (Html.BeginForm("result", "Search", FormMethod.Post))
+{
+    <div class="container mt-2 mb-2">
+        <div class="row">
+            <div class="col-8 offset-2 bg-light border rounded-lg row">
+                <div class="bordered-form-header border-bottom w-100 mb-4">
+                    <h2 class="text-center">Search</h2>
+                </div>
+                <form class="col-10 offset-1 bordered-form">
 
-<div class="container mt-2 mb-2">
-    <div class="row">
-        <div class="col-8 offset-2 bg-light border rounded-lg row">
-            <div class="bordered-form-header border-bottom w-100 mb-4">
-                <h2 class="text-center">Search</h2>
-            </div>
-            <form class="col-10 offset-1 bordered-form">
-
-                <div class="form-group">
-                    <label for="grade">Grade</label>
-                    <div class="input-group">
-                        <input type="number" class="form-control" id="gradeInput" placeholder="Ex: 95.5" required>
-                        <div class="input-group-append">
-                            <span class="input-group-text">%</span>
+                    <div class="form-group">
+                        <label for="grade">Grade</label>
+                        <div class="input-group">
+                            @*<input type="number" class="form-control" id="gradeInput" placeholder="Ex: 95.5" required>*@
+                            @Html.EditorFor(model => model.Startgrade, new { htmlAttributes = new { @class = "form-control" , @id="gradeInput" , @placeholder="Ex: 95.5 "} })
+                            <div class="input-group-append">
+                                <span class="input-group-text">%</span>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="scpecialization">Specialization</label>
-                    <select class="form-control" id="specialization" required>
-                        <option>Arts</option>
-                        <option>Science-Maths</option>
-                        <option>Science-Biology</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="governorate">Governorate</label>
-                    <select class="form-control" id="governorate">
-                        <option>--ANY--</option>
-                        <option>Cairo</option>
-                        <option>Giza</option>
-                        <option>Alexandria</option>
-                    </select>
-                </div>
-
-
-                <div class="form-group">
-                    <label for="interests">Your Interests</label>
-                    <div class="input-group border rounded bg-white">
-                        <input type="text" name="interests" class="form-control" InterestSelector placeholder="Ex: Drawaing, Litrature...">
+                    <div class="form-group">
+                        <label for="scpecialization">Specialization</label>
+                        @Html.DropDownList("specializationId", null, htmlAttributes: new { @class = "form-control" })
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col text-center">
-                        <button type="button" class="btn btn-dark border-0 bg-clr-secondary mb-2">Find me an opportunity!</button>
+
+                    <div class="form-group">
+                        <label for="governorate">Governorate</label>
+                        <select class="form-control" id="governorate">
+                            <option>--ANY--</option>
+                            <option>Cairo</option>
+                            <option>Giza</option>
+                            <option>Alexandria</option>
+
+                        </select>
+                        
                     </div>
-                </div>
-            </form>
+
+
+                    <div class="form-group">
+                        <label for="interests">Your Interests</label>
+                        <div class="input-group border rounded bg-white">
+                            <input type="text" name="interests" class="form-control" InterestSelector placeholder="Ex: Drawaing, Litrature...">
+                        </div>
+                    </div>
+                    <div class="row">
+                        @*<div class="col text-center">
+                                <button type="submit" class="btn btn-dark border-0 bg-clr-secondary mb-2">Find me an opportunity!</button>
+                            </div>*@
+
+                        <div class="col text-center">
+                            <input type="submit" name="Find me an opportunity!" class="btn btn-dark border-0 bg-clr-secondary mb-2" />
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
+}

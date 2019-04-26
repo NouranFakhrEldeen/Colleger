@@ -1,0 +1,67 @@
+﻿@model GraduationProject.Data.Entities.Tansiq
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Tansiq</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Division.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Division.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Faculty.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Faculty.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Specialization.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Specialization.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Startgrade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Startgrade)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Endgrade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Endgrade)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Actual)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Actual)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

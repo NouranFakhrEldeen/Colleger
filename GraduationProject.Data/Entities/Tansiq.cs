@@ -19,8 +19,11 @@ namespace GraduationProject.Data.Entities
         public int SpecializationId { get; set; }
         public virtual Specialization Specialization { get; set; }
         [ForeignKey("Faculty")]
-        public int FacultyId { get; set; }
+        public int? FacultyId { get; set; }
         public virtual Faculty Faculty { get; set; }
+        public int? DivisionId { get; set; }
+        public virtual Division Division { get; set; }
+
 
 
     }

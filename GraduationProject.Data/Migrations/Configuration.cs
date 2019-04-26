@@ -14,10 +14,17 @@ namespace GraduationProject.Data.Migrations
 
         protected override void Seed(GraduationProject.Data.DatabaseContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            context.Interests.Add(new Entities.Interest() { Id = 1, name = "software engineering"});
+            context.Interests.Add(new Entities.Interest() { Id = 2, name = "business" });
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data.
+
+            context.Specializations.Add(new Entities.Specialization() {  Id = 1 , Name = "3lm 3lom "});
+            context.Specializations.Add(new Entities.Specialization() { Id = 2, Name = "3lm rdyada " });
+            context.Specializations.Add(new Entities.Specialization() { Id = 3, Name = "adaby " });
+            context.Users.Add(new Entities.User() {Id = 1 , Email= "admin@gmail.com" , Password="123456678" , Firstname= "admin" , Lastname="" , Role= Entities.Role.admin , Recommendations = null});
+
+
+
         }
     }
 }
