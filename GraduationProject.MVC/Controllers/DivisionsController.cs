@@ -40,7 +40,7 @@ namespace GraduationProject.MVC.Controllers
         // GET: Division/Create
         public ActionResult Create()
         {
-            ViewBag.FacultyId = new SelectList(db.Faculties, "Id", "Name");
+            ViewBag.UniversityId = new SelectList(db.Universities, "Id", "Name");
             return View();
         }
 

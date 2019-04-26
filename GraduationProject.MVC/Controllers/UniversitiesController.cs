@@ -52,6 +52,10 @@ namespace GraduationProject.MVC.Controllers
             if (university == null)
             {
                 return HttpNotFound();
+            } else
+            {
+                university.Views = university.Views + 1;
+                db.SaveChanges();
             }
             return View(university);
         }
@@ -72,7 +76,11 @@ namespace GraduationProject.MVC.Controllers
             if (ModelState.IsValid)
             {
                 HttpPostedFileBase file = Request.Files["ImageData"];
-                university.Logo = ConvertToBytes(file);
+
+                if(file.ContentLength > 1)
+                {
+                    university.Logo = ConvertToBytes(file);
+                }
                 db.Universities.Add(university);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -113,6 +121,12 @@ namespace GraduationProject.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
+                HttpPostedFileBase file = Request.Files["LogoIncoming"];
+
+                if (file.ContentLength > 1)
+                {
+                    university.Logo = ConvertToBytes(file);
+                }
                 db.Entry(university).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
