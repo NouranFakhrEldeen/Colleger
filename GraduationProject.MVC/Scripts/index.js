@@ -1,4 +1,4 @@
-﻿(function () {
+﻿(async function () {
     localStorage.clear();
     let $eltInterestSelector = $('[InterestSelector]');
     if ($eltInterestSelector) {
@@ -70,7 +70,7 @@
                 console.log('its for division');
             }
             console.log('tansiq exists');
-            $tansiqSelectionComponent.append($(TansiqCreationComponentTemplate()));
+            $tansiqSelectionComponent.append($(await TansiqCreationComponentTemplate()));
         }
     }
 
@@ -79,8 +79,9 @@
         let $target = $(event.target);
         let $containerWrapper = $target.parent().parent().find('tansiqInfoContainer');
         let type = $target.attr('colleger-tansiqType');
+        let index = $target.attr('colleger-tansiqIndex');
         if (checked) {
-            $containerWrapper.append($(TansiqCreationInfoTemplate(type)));
+            $containerWrapper.append($(TansiqCreationInfoTemplate(type, index)));
         } else {
             $containerWrapper.empty();
         }
@@ -96,41 +97,53 @@
     };
 })();
 
-function TansiqCreationComponentTemplate(forDivision = false) {
+async function TansiqCreationComponentTemplate(forDivision = false) {
     let tansiqTemplate = `<div class="col w-100">`;
-    let arrayOfSpecializations = ['3lmy 3loom', '3lmyryada', 'adaby'];
-    for (const i of arrayOfSpecializations) {
-        let specializationObjectTemplate = `<div>
-            <div class="form-check">
-              <input class="form-check-input" tansiqActivationBox colleger-tansiqType="${i}" type="checkbox" value="" id="tansiqCheck-${i}">
-              <label class="form-check-label" for="tansiqCheck-${i}">
-                Accepts ${i}
-              </label>
-            </div>
-            <tansiqInfoContainer></tansiqInfoContainer>
-        </div>`;
-        tansiqTemplate += specializationObjectTemplate;
+    try {
+        let specialzationObjectsArray = await $.get('/api/specializations');
+        for (const j in specialzationObjectsArray) {
+            const i = specialzationObjectsArray[j];
+            let specializationObjectTemplate = `<div>
+                <div class="form-check">
+                    <input class="form-check-input" tansiqActivationBox colleger-tansiqType="${i.Id}" colleger-tansiqIndex="${j}" type="checkbox" value="" id="tansiqCheck-${j}">
+                    <label class="form-check-label" for="tansiqCheck-${j}">
+                    Accepts ${i.Name}
+                    </label>
+                </div>
+                <tansiqInfoContainer></tansiqInfoContainer>
+            </div>`;
+            tansiqTemplate += specializationObjectTemplate;
+        }
+    } catch (Err) {
+        console.log(Err);
     }
+    //let arrayOfSpecializations = ['3lmy 3loom', '3lmyryada', 'adaby'];
     tansiqTemplate += `</div>`;
     return tansiqTemplate;
 }
 
-function TansiqCreationInfoTemplate(forType, isEdit = false) {
+function TansiqCreationInfoTemplate(forType, index, isEdit = false) {
     let tansiqInfoTemplate = `<div class="row">
+        <input type="hidden" name="Tansiq[${index}].SpecializationId" value="${forType}">
     <div class="col-auto">
-        <label class="sr-only" for="tansiq['${forType}'].from">From</label>
-        <input type="number" class="form-control mb-2" id="tansiq['${forType}'].from" placeholder="From" name="tansiq['${forType}'].from">
+        <label class="sr-only" for="Tansiq[${index}].Startgrade">From</label>
+        <input type="number" class="form-control mb-2" id="Tansiq[${index}].Startgrade" placeholder="From" name="Tansiq[${index}].Startgrade">
     </div>
     <div class="col-auto">
-        <label class="sr-only" for="tansiq['${forType}'].to">To</label>
-        <input type="number" class="form-control mb-2" id="tansiq['${forType}'].to" placeholder="To" name="tansiq['${forType}'].to">
+        <label class="sr-only" for="Tansiq[${index}].Endgrade">To</label>
+        <input type="number" class="form-control mb-2" id="Tansiq[${index}].Endgrade" placeholder="To" name="Tansiq[${index}].Endgrade">
     </div>
     ${isEdit ? `
     <div class="col-auto">
-        <label class="sr-only" for="tansiq['${forType}'].actual">Actual</label>
-        <input type="number" class="form-control mb-2" id="tansiq['${forType}'].actual" placeholder="Actual" name="tansiq['${forType}'].actual">
+        <label class="sr-only" for="Tansiq[${index}].Actual">Actual</label>
+        <input type="number" class="form-control mb-2" id="Tansiq[${index}].Actual" placeholder="Actual" name="Tansiq[${index}].Actual">
     </div>
 `: ''}
     </div>`;
     return tansiqInfoTemplate;
+}
+
+function createFaculty(event) {
+    event.preventDefault();
+    console.log(event);
 }

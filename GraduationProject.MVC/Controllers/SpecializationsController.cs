@@ -124,5 +124,15 @@ namespace GraduationProject.MVC.Controllers
             }
             base.Dispose(disposing);
         }
+
+
+
+        [HttpGet]
+        [ActionName("API")]
+        public ActionResult getAllByUniversityId()
+        {
+            var specializations = db.Specializations;
+            return Json(specializations, JsonRequestBehavior.AllowGet);
+        }
     }
 }
