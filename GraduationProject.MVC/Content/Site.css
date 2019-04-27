@@ -114,6 +114,8 @@
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 75ch;
+
+    
 }
 
 .result-card .interests ul {
