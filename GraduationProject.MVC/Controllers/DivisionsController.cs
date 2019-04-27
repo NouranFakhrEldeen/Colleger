@@ -49,11 +49,25 @@ namespace GraduationProject.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create( Division division , List<Interest> Interests)
+        public ActionResult Create( Division division , string Interests)
         {
             //if (ModelState.IsValid)
             //{
+            var bb = Interests.Split(',');
+            var InterestsL = new List<int>();
+            foreach (var b in bb)
+            {
+
+                InterestsL.Add(Int32.Parse(b));
+            }
+            var lIntenerts = db.Interests.Where(i => InterestsL.Contains(i.Id));
                 db.Division.Add(division);
+            db.SaveChanges();
+
+            foreach (var i in lIntenerts)
+            {
+                division.Interests.Add(i);
+            }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             //}
