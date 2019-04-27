@@ -124,19 +124,19 @@ async function TansiqCreationComponentTemplate(forDivision = false) {
 
 function TansiqCreationInfoTemplate(forType, index, isEdit = false) {
     let tansiqInfoTemplate = `<div class="row">
-        <input type="hidden" name="Tansiq[${index}].SpecializationId" value="${forType}">
+        <input type="hidden" name="Tansiqs[${index}].SpecializationId" value="${forType}">
     <div class="col-auto">
-        <label class="sr-only" for="Tansiq[${index}].Startgrade">From</label>
-        <input type="number" class="form-control mb-2" id="Tansiq[${index}].Startgrade" placeholder="From" name="Tansiq[${index}].Startgrade">
+        <label class="sr-only" for="Tansiqs[${index}].Startgrade">From</label>
+        <input type="number" class="form-control mb-2" id="Tansiqs[${index}].Startgrade" placeholder="From" name="Tansiqs[${index}].Startgrade">
     </div>
     <div class="col-auto">
-        <label class="sr-only" for="Tansiq[${index}].Endgrade">To</label>
-        <input type="number" class="form-control mb-2" id="Tansiq[${index}].Endgrade" placeholder="To" name="Tansiq[${index}].Endgrade">
+        <label class="sr-only" for="Tansiqs[${index}].Endgrade">To</label>
+        <input type="number" class="form-control mb-2" id="Tansiqs[${index}].Endgrade" placeholder="To" name="Tansiqs[${index}].Endgrade">
     </div>
     ${isEdit ? `
     <div class="col-auto">
-        <label class="sr-only" for="Tansiq[${index}].Actual">Actual</label>
-        <input type="number" class="form-control mb-2" id="Tansiq[${index}].Actual" placeholder="Actual" name="Tansiq[${index}].Actual">
+        <label class="sr-only" for="Tansiqs[${index}].Actual">Actual</label>
+        <input type="number" class="form-control mb-2" id="Tansiqs[${index}].Actual" placeholder="Actual" name="Tansiqs[${index}].Actual">
     </div>
 `: ''}
     </div>`;
