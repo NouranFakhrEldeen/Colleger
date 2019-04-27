@@ -25,16 +25,22 @@ namespace GraduationProject.MVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult result( int SpecializationId , double? Startgrade, List<string> Interests, University university)
+        public ActionResult Result( int SpecializationId , double? Startgrade, List<string> Interests, University university)
         {
 
             var interstids = db.Interests.Select(a => a.Id).ToList();
             var result = db.Tansiq.Where(a => a.SpecializationId == SpecializationId /*&& a.Faculty.University.Governorate == university.Governorate*/ && a.Startgrade < Startgrade
             ).ToList();
-            //var result2 = db.Interests.Contains( )
+            //var result2 = db.Inerests.Contains( )
             //var result1 = db.Tansiq.Where(a => a.Division.Interests.Where(r => interstids.Contains(a.Id)) == Interests).ToList();
             //    .Select(n=>new { x = n.Faculty.Name , y = n.Faculty.University.Name , r = n.Division.Interests.SelectMany(a=>a.name)}) ;
             
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult Result()
+        {
             return View();
         }
 

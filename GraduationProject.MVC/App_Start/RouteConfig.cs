@@ -22,6 +22,11 @@ namespace GraduationProject.MVC
                 controller = "Faculties",
                 action = "API"
             });
+            routes.MapRoute("api/specializations", "api/specializations", new
+            {
+                controller = "Specializations",
+                action = "API"
+            });
             routes.MapRoute(
                name: "Default",
                url: "{controller}/{action}/{id}",
