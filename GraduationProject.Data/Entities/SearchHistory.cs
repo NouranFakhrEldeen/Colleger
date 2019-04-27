@@ -13,7 +13,7 @@ namespace GraduationProject.Data.Entities
         [Key]
         public int Id { get; set; }
         public string Governorate { get; set; }
-        public string Grade { get; set; }
+        public double Grade { get; set; }
         public DateTime Timestamp { get; set; }
         public bool Anonymous { get; set; }
         public virtual ICollection<Interest> Interests { get; set; }
