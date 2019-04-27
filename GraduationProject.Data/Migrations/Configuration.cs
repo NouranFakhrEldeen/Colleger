@@ -23,8 +23,9 @@ namespace GraduationProject.Data.Migrations
             context.Specializations.Add(new Entities.Specialization() { Id = 3, Name = "adaby " });
             context.Users.Add(new Entities.User() {Id = 1 , Email= "admin@gmail.com" , Password="123456678" , Firstname= "admin" , Lastname="" , Role= Entities.Role.admin , Recommendations = null});
 
-
-
+            context.Universities.Add(new Entities.University() { Id = 1 ,Name = "Uni1" , City= "nasr city" , Governorate = "Cairo" , Description= "" , Street = "test" , Zipcode= null , Logo = null });
+            context.Faculties.Add(new Entities.Faculty() { Id = 1, Name = "faculty1", UniversityId = 1, Description = null, logo = null, searchAppearancesCount = 1 });
+            context.Division.Add(new Entities.Division() { Id = 1, Name = "Divison1", FacultyId = 1, Description = null });
         }
     }
 }

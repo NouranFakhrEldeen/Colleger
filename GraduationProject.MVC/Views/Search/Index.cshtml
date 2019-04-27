@@ -17,7 +17,7 @@
                         <label for="grade">Grade</label>
                         <div class="input-group">
                             @*<input type="number" class="form-control" id="gradeInput" placeholder="Ex: 95.5" required>*@
-                            @Html.EditorFor(model => model.Startgrade, new { htmlAttributes = new { @class = "form-control" , @id="gradeInput" , @placeholder="Ex: 95.5 "} })
+                            @Html.EditorFor(model => model.Startgrade, new { htmlAttributes = new { @class = "form-control", @id = "gradeInput", @placeholder = "Ex: 95.5 " } })
                             <div class="input-group-append">
                                 <span class="input-group-text">%</span>
                             </div>
@@ -29,18 +29,24 @@
                         @Html.DropDownList("specializationId", null, htmlAttributes: new { @class = "form-control" })
                     </div>
 
-                    <div class="form-group">
-                        <label for="governorate">Governorate</label>
-                        <select class="form-control" id="governorate">
-                            <option>--ANY--</option>
-                            <option>Cairo</option>
-                            <option>Giza</option>
-                            <option>Alexandria</option>
+                    @*<div class="form-group">
+            <label for="governorate">Governorate</label>
+            <select class="form-control" id="governorate">
+                <option>--ANY--</option>
+                <option>Cairo</option>
+                <option>Giza</option>
+                <option>Alexandria</option>
 
-                        </select>
-                        
+            </select>
+
+        </div>*@
+                <div class="form-group row">
+                    <label for="Governorate">Governorate</label>
+                    <div class="col-md-10">
+                        <select id="Governorate" name="Governorate" class="form-control" GovernorateSelector></select>
+                       
                     </div>
-
+                </div>
 
                     <div class="form-group">
                         <label for="interests">Your Interests</label>
@@ -50,8 +56,8 @@
                     </div>
                     <div class="row">
                         @*<div class="col text-center">
-                                <button type="submit" class="btn btn-dark border-0 bg-clr-secondary mb-2">Find me an opportunity!</button>
-                            </div>*@
+                <button type="submit" class="btn btn-dark border-0 bg-clr-secondary mb-2">Find me an opportunity!</button>
+            </div>*@
 
                         <div class="col text-center">
                             <input type="submit" name="Find me an opportunity!" class="btn btn-dark border-0 bg-clr-secondary mb-2" />

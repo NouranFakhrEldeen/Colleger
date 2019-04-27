@@ -71,7 +71,7 @@ namespace GraduationProject.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,logo,searchAppearancesCount,UniversityId")] Faculty faculty)
+        public ActionResult Create( Faculty faculty)
         {
             if (ModelState.IsValid)
             {
