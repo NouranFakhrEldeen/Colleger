@@ -12,7 +12,7 @@
     <div class="row mt-2">
 
 
-        @using (Html.BeginForm("Create", "Faculties", FormMethod.Post, new { enctype = "multipart/form-data", @class ="col-lg-8 offset-lg-2 col-md-12 offset-md-0" }))
+        @using (Html.BeginForm("Create", "Faculties", FormMethod.Post, new { enctype = "application/json", @class ="col-lg-8 offset-lg-2 col-md-12 offset-md-0" }))
         {
             @Html.AntiForgeryToken()
 
