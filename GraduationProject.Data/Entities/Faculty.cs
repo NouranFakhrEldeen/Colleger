@@ -19,7 +19,7 @@ namespace GraduationProject.Data.Entities
         [ForeignKey("University")]
         public int UniversityId { get; set; }
         public virtual University University { get; set; }
-        public virtual ICollection<Tansiq> Tansiq { get; set; }
+        public virtual ICollection<Tansiq> Tansiqs { get; set; }
         public virtual ICollection<Division> Division { get; set; }
 
 

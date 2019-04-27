@@ -11,7 +11,7 @@ namespace GraduationProject.MVC.Models
         public string FacultyName { get; set; }
         public string UniversityName { get; set; }
         public IEnumerable<string> Interests { get; set; }
-        public List<string> SearchInterests { get; set; }
+        public ICollection<int> SearchInterests { get; set; }
         public string Division { get; set; }
         public string Description { get; set; }
         public double Average { get; set; }

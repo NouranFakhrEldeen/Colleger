@@ -27,7 +27,7 @@ namespace GraduationProject.MVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult Result(int SpecializationId, double Startgrade, List<string> Interests, string Governorate)
+        public ActionResult Result(int SpecializationId, double Startgrade, List<int> Interests, string Governorate)
         {
 
 
@@ -50,6 +50,17 @@ namespace GraduationProject.MVC.Controllers
                 , Average = avg , grade = Startgrade  });
             }
             
+            SearchHistory searchHistory = new SearchHistory()
+            {
+                Governorate = Governorate,
+                SpecializationId = SpecializationId,
+                
+                Grade = Startgrade,
+                Timestamp = DateTime.Now
+
+            };
+            db.SearchHistories.Add(searchHistory);
+            db.SaveChanges();
 
             return View(Results);
         }

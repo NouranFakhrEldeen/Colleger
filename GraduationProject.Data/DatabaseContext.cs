@@ -24,7 +24,9 @@ namespace GraduationProject.Data
 
         public virtual DbSet<Tansiq> Tansiq { get; set; }
         public virtual DbSet<Recommendation> Recommendations { get; set; }
-       
+        
+        public virtual DbSet<SearchHistory> SearchHistories { get; set; }
+
         public System.Data.Entity.DbSet<GraduationProject.Data.Entities.Interest> Interests { get; set; }
 
         public System.Data.Entity.DbSet<GraduationProject.Data.Entities.University> Universities { get; set; }

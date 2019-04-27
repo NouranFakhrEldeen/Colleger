@@ -49,17 +49,18 @@ namespace GraduationProject.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,ExtraInfo,Views,FacultyId")] Division division)
+        public ActionResult Create( Division division , List<Interest> Interests)
         {
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 db.Division.Add(division);
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            }
+            //}
 
-            ViewBag.FacultyId = new SelectList(db.Faculties, "Id", "Name", division.FacultyId);
-            return View(division);
+            //ViewBag.UniversityId = new SelectList(db.Universities, "Id", "Name");
+
+            //return View(division);
         }
 
         // GET: Division/Edit/5
