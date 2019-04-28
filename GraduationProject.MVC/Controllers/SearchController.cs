@@ -27,33 +27,38 @@ namespace GraduationProject.MVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult Result(int SpecializationId, double Startgrade, List<int> Interests, string Governorate)
+        public ActionResult Result(int specializationId, double Startgrade, string iii, string Governorate)
         {
+            var bb = iii.Split(',');
+            var interstids = new List<int>();
+            foreach (var b in bb)
+            {
 
+                interstids.Add(Int32.Parse(b));
+            }
 
-            var interstids = (db.Interests.Select(a => a.Id)).ToList();
-            var result = db.Tansiq.Where(a => a.SpecializationId == SpecializationId && a.Faculty.University.Governorate == Governorate && a.Startgrade < Startgrade
+            var interestList = db.Interests.Where(a => interstids.Contains(a.Id)).ToList();
 
-            ).ToList();
-            var avg = db.Tansiq.Select(a=>a.Actual).Average();
-            var result2 = result.Where(r => interstids.Contains(r.Id)).ToList();
+            var result = db.Tansiq.Where(a => a.SpecializationId == specializationId && a.Division.Faculty.University.Governorate == Governorate && a.Startgrade < Startgrade).ToList();
+            //var avg = db.Tansiq.Select(a=>a.Actual).Average();
+            var result2 = result.Where(r => r.Division.Interests.Intersect(interestList).Any()).ToList();
            
             List<ResultViewModel> Results = new List<ResultViewModel>();
             
             foreach(var i in result2)
             {
 
-            Results.Add(new ResultViewModel { FacultyName = i.Faculty.Name , UniversityName = i.Faculty.University.Name,
-                Interests = i.Division.Interests.Select(a=>a.name) ,SearchInterests = Interests ,
+            Results.Add(new ResultViewModel { FacultyName = i.Division.Faculty.Name , UniversityName = i.Division.Faculty.University.Name,
+                Interests = i.Division.Interests.Select(a=>a.name) ,SearchInterests = interstids ,
                 Description = i.Division.Description ,
                 Division = i.Division.Name
-                , Average = avg , grade = Startgrade  });
+                , Average = 0 , grade = Startgrade  });
             }
             
             SearchHistory searchHistory = new SearchHistory()
             {
                 Governorate = Governorate,
-                SpecializationId = SpecializationId,
+                SpecializationId = specializationId,
                 
                 Grade = Startgrade,
                 Timestamp = DateTime.Now
