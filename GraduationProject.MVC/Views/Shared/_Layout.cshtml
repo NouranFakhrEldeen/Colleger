@@ -1,15 +1,16 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html style="height:100% !important">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - COLEGER</title>
 
-    @Styles.Render("~/Content/css")
     <link rel="stylesheet" href="@Url.Content("~/Content/bootstrap-tags-input.css")" />
     <link rel="stylesheet" href="@Url.Content("~/Content/typeahead.css")" />
     <link rel="stylesheet" href="@Url.Content("~/Content/fa.all.min.css")" />
 
+    @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
     @Scripts.Render("~/bundles/jquery")
@@ -27,24 +28,31 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
                     <a class="nav-link" href="@Url.Action("Index", "Home")">Home <span class="sr-only">(current)</span></a>
                 </li>
+
                 @if (User.IsInRole("admin"))
                 { }
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dashboard
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="@Url.Action("Index", "Universities")">Universities</a>
-                        <a class="dropdown-item" href="@Url.Action("Index", "Faculties")">Faculties</a>
-                        <a class="dropdown-item" href="@Url.Action("Index", "Division")"> Division </a>
-                        <a class="dropdown-item" href="@Url.Action("Index", "Interests")"> Interests </a>
-                    </div>
+                @*<li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dashboard
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="@Url.Action("Index", "Universities")">Universities</a>
+                <a class="dropdown-item" href="@Url.Action("Index", "Faculties")">Faculties</a>
+                <a class="dropdown-item" href="@Url.Action("Index", "Division")"> Division </a>
+                <a class="dropdown-item" href="@Url.Action("Index", "Interests")"> Interests </a>
+            </div>
+        </li>*@
+
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index", "Dashboard")">Dashboard<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link clr-secondary" href="@Url.Action("Index", "Search")">Find me a college!<span class="sr-only">(current)</span></a>
                 </li>
             </ul>
 

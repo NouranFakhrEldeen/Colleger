@@ -186,6 +186,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\DivisionsController.cs" />
     <Compile Include="Controllers\FacultiesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -213,6 +214,7 @@
     <Content Include="Content\bootstrap-tags-input.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\sb-admin.min.css" />
     <Content Include="Content\typeahead.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -271,6 +273,7 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\sb-admin.min.js" />
     <Content Include="Scripts\typeahead.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
@@ -337,6 +340,8 @@
     <Content Include="Views\Tansiqs\Details.cshtml" />
     <Content Include="Views\Tansiqs\Edit.cshtml" />
     <Content Include="Views\Tansiqs\Index.cshtml" />
+    <Content Include="Views\Shared\_Dashboard_Layout.cshtml" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

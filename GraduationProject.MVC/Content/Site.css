@@ -168,3 +168,17 @@
         padding-top: 100% !important;
     }
 }
+
+.border-lg {
+    border-width: 5px;
+}
+.border-md {
+    border-width: 3px;
+}
+.border-sm {
+    border-width: 1px;
+}
+
+.border-solid {
+    border-style: solid;
+}

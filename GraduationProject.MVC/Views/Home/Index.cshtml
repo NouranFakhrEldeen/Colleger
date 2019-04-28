@@ -12,15 +12,15 @@
                 <div class="carousel-item active">
                     <img src="~/Images/slider1.png" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>First slide label</h5>
-                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                        <a class="btn btn-lg btn-primary bg-clr-primary" href="@Url.Action("Index", "Search")">Find me a College Now!</a>
                     </div>
                 </div>
                 <div class="carousel-item">
                     <img src="~/Images/slider2.png" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>Second slide label</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <a class="btn btn-lg btn-primary bg-clr-secondary" href="@Url.Action("Index", "Search")">Find me a College Now!</a>
+                        @*<h5>Second slide label</h5>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>*@
                     </div>
                 </div>
             </div>
@@ -33,4 +33,116 @@
                 <span class="sr-only">Next</span>
             </a>
         </div>
+    </div>
+
+    <div class="container my-5">
+
+        <div class="row">
+
+            <div class="col-lg-4 col-12 text-center bg-light">
+                <h3 class="my-3">Hello!</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </div>
+
+
+            <div class="col-lg-4 col-12 text-center bg-light px-3">
+                <h3 class="my-3">About!</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </div>
+
+
+            <div class="col-lg-4 col-12 text-center bg-light px-3">
+                <h3 class="my-3">Mission!</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </div>
+
+        </div>
+
+        <div class="row my-3">
+            <div class="col"><hr></div>
+            <div class="col-auto clr-primary"><h3 class="m-0">OUR TEAM</h3></div>
+            <div class="col"><hr></div>
+        </div>
+
+        <div class="row text-white">
+            <div class="col-lg-3 col-md-6 col-sm-12 text-center p-3">
+                <div class="inner bg-clr-primary border rounded-lg pb-3">
+                    <div class="image my-5">
+                        <img class="rounded-circle border-white border-md border-solid" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHWAoQ916iRw6xL3xgw8ebhq_XYl6yhiFeq1DMQuQRqLmOR7vv2g" width="100px" height="100px" alt="" />
+                    </div>
+                    <h3 class="w-100">Mohamed Ahmed</h3>
+                    <h6>Software developer</h6>
+                    <q class="text-white font-italic font-weight-light">The king in the north</q>
+
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 text-center p-3">
+                <div class="inner bg-clr-primary border rounded-lg pb-3">
+                    <div class="image my-5">
+                        <img class="rounded-circle border-white border-md border-solid" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHWAoQ916iRw6xL3xgw8ebhq_XYl6yhiFeq1DMQuQRqLmOR7vv2g" width="100px" height="100px" alt="" />
+                    </div>
+                    <h3 class="w-100">Abdelrahman</h3>
+                    <h6>Software developer</h6>
+                    <q class="text-white font-italic font-weight-light">Winter is coming</q>
+
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 text-center p-3">
+                <div class="inner bg-clr-primary border rounded-lg pb-3">
+                    <div class="image my-5">
+                        <img class="rounded-circle border-white border-md border-solid" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHWAoQ916iRw6xL3xgw8ebhq_XYl6yhiFeq1DMQuQRqLmOR7vv2g" width="100px" height="100px" alt="" />
+                    </div>
+                    <h3 class="w-100">Ahmed Ali</h3>
+                    <h6>Software developer</h6>
+                    <q class="text-white font-italic font-weight-light">Bend the knee!</q>
+
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 text-center p-3">
+                <div class="inner bg-clr-primary border rounded-lg pb-3">
+                    <div class="image my-5">
+                        <img class="rounded-circle border-white border-md border-solid" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHWAoQ916iRw6xL3xgw8ebhq_XYl6yhiFeq1DMQuQRqLmOR7vv2g" width="100px" height="100px" alt="" />
+                    </div>
+                    <h3 class="w-100">Jon Doe</h3>
+                    <h6>Software developer</h6>
+                    <q class="text-white font-italic font-weight-light">Hear me roar</q>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row my-3">
+            <div class="col"><hr></div>
+            <div class="col-auto clr-primary"><h3 class="m-0">SUCCESS STORIES</h3></div>
+            <div class="col"><hr></div>
+        </div>
+
+
+        <div class="row my-3">
+            <div class="col"><hr></div>
+            <div class="col-auto clr-primary"><h3 class="m-0">PARTNERS</h3></div>
+            <div class="col"><hr></div>
+        </div>
+
+        <div class="row">
+            <div class="col-2">
+                <img src="http://pigment.github.io/fake-logos/logos/large/color/space-cube.png" alt="" style="width:100%;" />
+            </div>
+            <div class="col-2">
+                <img src="https://camo.githubusercontent.com/b0e5c1e174dcb2911bc712f240f7163fe597628c/687474703a2f2f7069676d656e742e6769746875622e696f2f66616b652d6c6f676f732f6c6f676f732f766563746f722f636f6c6f722f6a616d65732d616e642d736f6e732e737667" alt="" style="width:100%;" />
+            </div>
+            <div class="col-2">
+                <img src="https://camo.githubusercontent.com/0072b8f37157c7e0238342d8105dcc2c9b1e2217/687474703a2f2f7069676d656e742e6769746875622e696f2f66616b652d6c6f676f732f6c6f676f732f766563746f722f636f6c6f722f626162792d7377696d2e737667" alt="" style="width:100%;" />
+            </div>
+            <div class="col-2">
+                <img src="https://camo.githubusercontent.com/370291c50b74eeab6fe66ccc9e6ca410fc117ed9/687474703a2f2f7069676d656e742e6769746875622e696f2f66616b652d6c6f676f732f6c6f676f732f766563746f722f636f6c6f722f7468652d7765622d776f726b732e737667" alt="" style="width:100%;" />
+            </div>
+            <div class="col-2">
+                <img src="https://camo.githubusercontent.com/0112d20015b4dad56fbb07088e76552042539151/687474703a2f2f7069676d656e742e6769746875622e696f2f66616b652d6c6f676f732f6c6f676f732f766563746f722f636f6c6f722f70657465732d626c696e64732e737667" alt="" style="width:100%;" />
+            </div>
+            <div class="col-2">
+                <img src="https://camo.githubusercontent.com/e7141f1aa02b6721a702b44a3b14b7383e4539ed/687474703a2f2f7069676d656e742e6769746875622e696f2f66616b652d6c6f676f732f6c6f676f732f766563746f722f636f6c6f722f63726f6674732d6163636f756e74616e74732e737667" alt="" style="width:100%;" />
+            </div>
+        </div>
+
     </div>
