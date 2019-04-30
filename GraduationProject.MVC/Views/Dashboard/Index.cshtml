@@ -4,5 +4,114 @@
     Layout = "~/Views/Shared/_Dashboard_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h3>Dashboard</h3>
+<div class="row">
+    <div class="col-xl-3 col-sm-6 mb-3">
+        <div class="card text-white bg-primary o-hidden h-100">
+            <div class="card-body">
+                <div class="card-body-icon">
+                    <i class="fas fa-fw fa-users"></i>
+                </div>
+                <h3>@ViewBag.usersCount</h3>
+                <div class="mr-5">Users</div>
+            </div>
+           
+        </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 mb-3">
+        <div class="card text-white bg-warning o-hidden h-100">
+            <div class="card-body">
+                <div class="card-body-icon">
+                    <i class="fas fa-fw fa-school"></i>
+                </div>
+                <h3>@ViewBag.universitiesCount</h3>
+                <div class="mr-5">Univerisites</div>
+            </div>
 
+        </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 mb-3">
+        <div class="card text-white bg-success o-hidden h-100">
+            <div class="card-body">
+                <div class="card-body-icon">
+                    <i class="fas fa-fw fa-search"></i>
+                </div>
+                <h3>@ViewBag.searchCount</h3>
+                <div class="mr-5">Searches</div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 mb-3">
+        <div class="card text-white bg-danger o-hidden h-100">
+            <div class="card-body">
+                <div class="card-body-icon">
+                    <i class="fas fa-fw fa-save"></i>
+                </div>
+                <h3>@ViewBag.savedRecommendations</h3>
+                <div class="mr-5">Saved Recommendations</div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@*<div>@Json.Encode(ViewBag.countPerDay)</div>*@
+
+<div class="row">
+    <div class="col">
+        <canvas id="main-Chart" width="100" height="30"></canvas>
+    </div>
+</div>
+<script>
+    var ctx = document.getElementById('main-Chart').getContext('2d');
+    let dataLabelsArrayString = "@Json.Encode(ViewBag.countPerDayLabels)";
+    dataLabelsArrayString = dataLabelsArrayString.replace(/&quot;/g, '"');
+    let dataLabelArray = JSON.parse(dataLabelsArrayString);
+    dataLabelArray = dataLabelArray.map(o => {
+        let n = Number(o.Day.substr(6, 13));
+        let d = new Date(n);
+
+        return d.toLocaleDateString();
+    });
+    let dataArrayString = "@Json.Encode(ViewBag.countPerDayData)";
+    dataArrayString = dataArrayString.replace(/&quot;/g, '"');
+    let dataArray = JSON.parse(dataArrayString);
+    dataArray = dataArray.map(o => o.Value);
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: dataLabelArray,
+        datasets: [{
+            label: 'Searches',
+            data: dataArray,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+</script>
