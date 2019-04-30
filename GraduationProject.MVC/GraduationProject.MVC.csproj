@@ -223,6 +223,7 @@
     <Content Include="Images\logo-white.png" />
     <Content Include="Images\slider1.png" />
     <Content Include="Images\slider2.png" />
+    <Content Include="Scripts\chart.js" />
     <Content Include="Scripts\fa.all.min.js" />
     <Content Include="Scripts\bootstrap-tags-input.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
