@@ -11,6 +11,8 @@ using GraduationProject.Data.Entities;
 
 namespace GraduationProject.MVC.Controllers
 {
+    [RoutePrefix("Dashboard/Interests")]
+    [Route("{action=Index}")]
     public class InterestsController : Controller
     {
         private DatabaseContext db = new DatabaseContext();
@@ -127,7 +129,7 @@ namespace GraduationProject.MVC.Controllers
 
 
         [HttpGet]
-        [ActionName("API")]
+        [Route("~/api/interests")]
         public ActionResult getAll()
         {
             var interests = db.Interests.Select(i => new { i.Id, i.name }).ToList();

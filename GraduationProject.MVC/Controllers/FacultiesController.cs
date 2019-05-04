@@ -12,6 +12,8 @@ using GraduationProject.Data.Entities;
 
 namespace GraduationProject.MVC.Controllers
 {
+    [RoutePrefix("Dashboard/Faculties")]
+    [Route("{action=Index}")]
     public class FacultiesController : Controller
     {
         private DatabaseContext db = new DatabaseContext();

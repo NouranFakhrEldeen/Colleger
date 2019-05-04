@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace GraduationProject.MVC.Controllers
 {
+    [RoutePrefix("Dashboard")]
     public class DashboardController : Controller
     {
         private DatabaseContext db = new DatabaseContext();

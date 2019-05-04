@@ -1,4 +1,5 @@
-﻿(async function () {
+﻿
+(async function () {
     localStorage.clear();
     let $eltInterestSelector = $('[InterestSelector]');
     if ($eltInterestSelector) {
@@ -22,6 +23,30 @@
             }
         });
     }
+
+    let $eltCoursesSelector = $('[CoursesSelector]');
+    if ($eltCoursestSelector) {
+        const courses = new Bloodhound({
+            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            prefetch: "/api/courses"
+        });
+        interests.initialize();
+
+        $eltCoursesSelector.tagsinput({
+            itemValue: 'Id',
+            itemText: 'name',
+
+            typeaheadjs: {
+                name: 'coursesInput',
+                displayKey: 'name',
+                highlight: true,
+                hint: false,
+                source: interests.ttAdapter()
+            }
+        });
+    }
+
 
     let $eltGovernorateSelector = $('[GovernorateSelector]');
     if ($eltGovernorateSelector) {

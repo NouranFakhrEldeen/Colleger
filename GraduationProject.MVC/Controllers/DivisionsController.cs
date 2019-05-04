@@ -11,6 +11,8 @@ using GraduationProject.Data.Entities;
 
 namespace GraduationProject.MVC.Controllers
 {
+    [RoutePrefix("Dashboard/Divisions")]
+    [Route("{action=Index}")]
     public class DivisionController : Controller
     {
         private DatabaseContext db = new DatabaseContext();

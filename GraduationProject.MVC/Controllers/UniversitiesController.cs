@@ -12,6 +12,8 @@ using GraduationProject.Data.Entities;
 
 namespace GraduationProject.MVC.Controllers
 {
+    [RoutePrefix("Dashboard/Universities")]
+    [Route("{action=Index}")]
     public class UniversitiesController : Controller
     {
         private DatabaseContext db = new DatabaseContext();
@@ -21,6 +23,8 @@ namespace GraduationProject.MVC.Controllers
         {
             return View(db.Universities.ToList());
         }
+
+        [Route("RetrieveImage/{id}")]
         public ActionResult RetrieveImage(int id)
         {
             byte[] cover = GetImageFromDataBase(id);

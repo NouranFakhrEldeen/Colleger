@@ -11,6 +11,8 @@ using GraduationProject.Data.Entities;
 
 namespace GraduationProject.MVC.Controllers
 {
+    [RoutePrefix("Dashboard/Specializations")]
+    [Route("{action=Index}")]
     public class SpecializationsController : Controller
     {
         private DatabaseContext db = new DatabaseContext();
@@ -128,7 +130,7 @@ namespace GraduationProject.MVC.Controllers
 
 
         [HttpGet]
-        [ActionName("API")]
+        [Route("~/api/specializations")]
         public ActionResult getAllByUniversityId()
         {
             var specializations = db.Specializations;
