@@ -22,7 +22,6 @@ namespace GraduationProject.MVC.Services
             rvm.UniversityName = rec.Division.Faculty.University.Name;
             rvm.Division = rec.Division.Name;
             rvm.Description = rec.Division.Description;
-            rvm.SearchInterests = rec.SearchHistory.Interests.ToList();
 
             rvm.saved = saved;
 
@@ -46,9 +45,20 @@ namespace GraduationProject.MVC.Services
 
             rvm.avgFacstart = facultyTansiq.Startgrade;
             rvm.avgFacend = facultyTansiq.Endgrade;
-            var divIntIds = rec.Division.Interests.Select(i => i.Id).ToList();
-            rvm.Interests = rec.SearchHistory.Interests.Where(i => divIntIds.Contains(i.Id)).Select(i => i.name);
 
+            var SearchInterestsIds = rec.SearchHistory.Interests.Select(i => i.Id).ToList();
+
+            rvm.SearchInterests = rec.Division.Interests.Where(i => SearchInterestsIds.Contains(i.Id)).ToList();
+
+            if (SearchInterestsIds.Count > 0)
+            {
+                rvm.Interests = rec.Division.Interests.Where(i => !SearchInterestsIds.Contains(i.Id)).Select(i => i.name).ToList();
+            } else
+            {
+                rvm.Interests = rec.Division.Interests.Select(i => i.name).ToList();
+            }
+
+            rvm.likelihood = getLikelihood(rec.SearchHistory.Grade, divisionTansiq.Startgrade, divisionTansiq.Endgrade);
 
             return rvm;
         }
@@ -61,6 +71,24 @@ namespace GraduationProject.MVC.Services
                 lRvm.Add(getRecommendationVMById(i, saved));
             }
             return lRvm;
+        }
+
+        public static int getLikelihood(double sGrade, double min, double max)
+        {
+            double avg = (min + max) / 2;
+            
+            if (sGrade >= min && sGrade < avg)
+            {
+                return 0;
+            }
+            else if(sGrade >= avg && sGrade < max)
+            {
+                return 1;
+            }
+            else
+            {
+                return 2;
+            }
         }
     }
 }

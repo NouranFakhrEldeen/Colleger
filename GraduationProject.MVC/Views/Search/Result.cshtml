@@ -1,5 +1,7 @@
 ﻿
 @model IEnumerable<GraduationProject.MVC.Models.ResultViewModel>
+@using GraduationProject.MVC.Models;
+
 @{
     ViewBag.Title = "Result";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -13,86 +15,7 @@
             <!--Search Result Item:Start-->
             @foreach (var item in Model)
             {
-                <div class="bg-light border row result-card">
-                    <div class="col-md-3 image-wrapper">
-                        @*<img src="/Universities/RetrieveImage/@item.Id" alt="" height=100 width=200 />*@
-                        @* <img src="https://www.timeshighereducation.com/sites/default/files/stanford-university-best-universities-in-the-united-states-2016.jpg" alt="" />*@
-                    </div>
-
-                    <div class="col-md-9 content-wrapper">
-                        <div class="row">
-                            <a href="#">
-                                <h3 class="col-12">
-                                    @Html.Label(item.Division)
-                                </h3>
-                            </a>
-                            <div class="col-12">
-                                <a href="#">
-                                    <span class="">
-                                        <i class="fas fa-school"></i>
-                                        @Html.Label(item.UniversityName)
-                                    </span>
-                                </a>
-                                <span class="mx-2">-</span>
-                                <a href="#">
-                                    <span class="">
-                                        <i class="fas fa-university"></i>
-                                        @Html.Label(item.FacultyName)
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="w-100 mt-3 description">
-                            @Html.Label(item.Description)
-                        </div>
-
-                        <div class="w-100 mt-3 tansiqs">
-                            <fieldset class="alert alert-success tansiq">
-                                <legend><strong>HIGHLY LIKELY <i class="fas fa-check"></i></strong></legend>
-                                <p class="m-0 p-0">
-                                    <span>Average Division Tansiq for the past 5 years: <strong>@Html.Label(item.avgDivisionstart.ToString("N2")) ~ @Html.Label(item.avgDivisionend.ToString("N2")) %</strong></span> <br />
-                                    <span>Average  Faculty Tansiq for the past 5 years: <strong>@Html.Label(item.avgFacstart.ToString("N2")) ~ @Html.Label(item.avgFacstart.ToString("N2")) %</strong></span> <br />
-                                    <span>Yours: <strong>@Html.Label(item.grade.ToString())%</strong></span>
-                                </p>
-                            </fieldset>
-                            <div class="division-tansiq">
-
-                            </div>
-                        </div>
-
-                        <div class="w-100 mt-2 interests common">
-                            <h6>Common Interests</h6>
-                            <ul>
-                                @foreach (var r in item.SearchInterests)
-                                {
-                                    <li>@Html.Label(r.name)</li>
-                                }
-                            </ul>
-                        </div>
-                        <div class="w-100 mt-2 interests">
-                            <h6>Other Interests</h6>
-                            <ul>
-
-
-                                @foreach (var i in item.Interests)
-                                {
-                                    <li>@Html.Label(i)</li>
-                                }
-                            </ul>
-                        </div>
-
-
-
-                        <div class="w-100">
-                            <button class="btn btn-sm-primary text-white bg-clr-secondary float-right">
-                                <i class="fas fa-star"></i>
-                                save
-                            </button>
-                        </div>
-
-                    </div>
-                </div>
+                @Html.Partial("~/Views/Search/_Search_Result_Item.cshtml", (ResultViewModel)item)
             }
             <!--Search Result Item:End-->
 

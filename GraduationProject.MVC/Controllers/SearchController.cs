@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using GraduationProject.MVC.Models;
 using GraduationProject.Data.Entities;
-
+using GraduationProject.MVC.Services;
 
 namespace GraduationProject.MVC.Controllers
 {
@@ -27,50 +27,54 @@ namespace GraduationProject.MVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult Result(int specializationId, double Startgrade, string iii, string Governorate , double Fees , string course)
+        public ActionResult Result(int specializationId, double Startgrade, string iii = "", string Governorate = "" , double Fees = 0, string course = "")
         {
             var bb = iii.Split(',');
             var interstids = new List<int>();
-            foreach (var b in bb)
+            if (iii.Length > 0)
             {
+                foreach (var b in bb)
+                {
 
-                interstids.Add(Int32.Parse(b));
+                    interstids.Add(Int32.Parse(b));
+                }
             }
             var cc = course.Split(',');
             var courseids = new List<int>();
-            foreach (var c in cc)
+            if(course.Length > 0)
             {
+                foreach (var c in cc)
+                {
 
-                courseids.Add(Int32.Parse(c));
+                    courseids.Add(Int32.Parse(c));
+                }
             }
             var courseList = db.Courses.Where(r => courseids.Contains(r.Id)).ToList();
             var interestList = db.Interests.Where(a => interstids.Contains(a.Id)).ToList();
 
-            var result = db.Tansiq.Where(a => a.SpecializationId == specializationId && a.Startgrade < Startgrade ||a.Division.Faculty.University.Governorate == Governorate || a.Division.Fees < Fees).ToList();
-            var avgDivisionstart = db.Tansiq.Where(a => a.DivisionId != null).Select(a => a.Startgrade).Average();
-            var avgDivisionend = db.Tansiq.Where(a => a.DivisionId != null).Select(a => a.Endgrade).Average();
-            var avgFacstart = db.Tansiq.Where(a => a.FacultyId != null).Select(a => a.Startgrade).Average();
-            var avgFacend = db.Tansiq.Where(a => a.FacultyId != null).Select(a => a.Endgrade).Average();
+            var result = db.Tansiq.Where(a => a.SpecializationId == specializationId && a.Startgrade <= Startgrade).ToList();
 
-            var Result = result.Where(r => r.Division.Interests.Intersect(interestList).Any()).ToList().
-             Where(n=>n.Division.Courses.Intersect(courseList).Any()).ToList();
-           
-            List<ResultViewModel> Results = new List<ResultViewModel>();
-            
-            foreach(var i in Result)
+
+            if(interestList.Count > 0)
             {
-
-            Results.Add(new ResultViewModel { FacultyName = i.Division.Faculty.Name , UniversityName = i.Division.Faculty.University.Name,
-                Interests = i.Division.Interests.Select(a=>a.name) ,SearchInterests = interestList ,
-                Description = i.Division.Description ,
-                Division = i.Division.Name
-                ,
-                avgDivisionstart = avgDivisionstart,
-                avgDivisionend = avgDivisionend,
-                avgFacstart= avgFacstart,
-                avgFacend= avgFacend,
-                grade = Startgrade  });
+                result = result.Where(r => r.Division.Interests.Intersect(interestList).Any()).ToList();
             }
+
+            if(courseList.Count > 0)
+            {
+                result = result.Where(n => n.Division.Courses.Intersect(courseList).Any()).ToList();
+            }
+
+            if(Governorate != "" && Governorate != null)
+            {
+                result = result.Where(n => n.Division.Faculty.University.Governorate == Governorate).ToList();
+            }
+
+            if(Fees > 0)
+            {
+                result = result.Where(n => n.Division.Fees >= Fees).ToList();
+            }
+
 
 
             SearchHistory searchHistory = new SearchHistory()
@@ -80,19 +84,20 @@ namespace GraduationProject.MVC.Controllers
                 Grade = Startgrade,
                 Timestamp = DateTime.Now,
                 Interests = interestList
-
-
             };
-            
             db.SearchHistories.Add(searchHistory);
             db.SaveChanges();
-           
-            foreach(var x in Result )
-            {
 
-                db.Recommendations.Add(new Recommendation { SearchHistoryId = searchHistory.Id, DivisionId = x.Division.Id});
+            foreach (var x in result)
+            {
+                db.Recommendations.Add(new Recommendation { SearchHistoryId = searchHistory.Id, DivisionId = x.Division.Id });
             }
             db.SaveChanges();
+
+            var recIds = db.Recommendations.Where(r => r.SearchHistoryId == searchHistory.Id).Select(r => r.Id).ToList();
+
+            List<ResultViewModel> Results = RecommendationExtractorService.getRecommendationVMListByIdList(recIds);
+
             return View(Results);
         }
         public ActionResult RetrieveImage(int id)

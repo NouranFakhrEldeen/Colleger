@@ -1,81 +1,90 @@
 ﻿@model GraduationProject.MVC.Models.ResultViewModel
-<div class="bg-light border row result-card">
-    <div class="col-md-3 image-wrapper">
-        @*<img src="/Universities/RetrieveImage/@Model.Id" alt="" height=100 width=200 />*@
-        @* <img src="https://www.timeshighereducation.com/sites/default/files/stanford-university-best-universities-in-the-united-states-2016.jpg" alt="" />*@
-    </div>
+    <div class="bg-light border row result-card my-3">
 
-    <div class="col-md-9 content-wrapper">
-        <div class="row">
-            <a href="#">
-                <h3 class="col-12">
-                    @Html.Label(Model.Division)
-                </h3>
-            </a>
-            <div class="col-12">
+        <div class="col-md-12 content-wrapper">
+            <div class="row">
                 <a href="#">
-                    <span class="">
-                        <i class="fas fa-school"></i>
-                        @Html.Label(Model.UniversityName)
-                    </span>
+                    <h3 class="col-12">
+                        @Html.Label(Model.Division)
+                    </h3>
                 </a>
-                <span class="mx-2">-</span>
-                <a href="#">
-                    <span class="">
-                        <i class="fas fa-university"></i>
-                        @Html.Label(Model.FacultyName)
-                    </span>
-                </a>
+                <div class="col-12">
+                    <a href="#">
+                        <span class="">
+                            <i class="fas fa-school"></i>
+                            @Html.Label(Model.UniversityName)
+                        </span>
+                    </a>
+                    <span class="mx-2">-</span>
+                    <a href="#">
+                        <span class="">
+                            <i class="fas fa-university"></i>
+                            @Html.Label(Model.FacultyName)
+                        </span>
+                    </a>
+                </div>
             </div>
-        </div>
 
-        <div class="w-100 mt-3 description">
-            @Html.Label(Model.Description)
-        </div>
+            <div class="w-100 mt-3 description">
+                @Html.Label(Model.Description)
+            </div>
 
-        <div class="w-100 mt-3 tansiqs">
-            <fieldset class="alert alert-success tansiq">
-                <legend><strong>HIGHLY LIKELY <i class="fas fa-check"></i></strong></legend>
+            <div class="w-100 mt-3 tansiqs">
+                @switch (Model.likelihood)
+                {
+                    case 0:
+                        @: <fieldset class="alert alert-warning tansiq">
+                            <legend><strong>POSSIBLE <i class="fas fa-check"></i></strong></legend>
+                            break;
+                        case 1:
+                            @:  <fieldset class="alert alert-info tansiq">
+                                <legend><strong>LIKELY <i class="fas fa-check"></i></strong></legend>
+                                break;
+                            case 2:
+                                @:<fieldset class="alert alert-success tansiq">
+                                    <legend><strong>HIGHLY LIKELY <i class="fas fa-check"></i></strong></legend>
+                                    break;
+                            }
                 <p class="m-0 p-0">
-                    <span>Average Division Tansiq for the past 5 years: <strong>@Html.Label(Model.avgDivisionstart.ToString("N2")) ~ @Html.Label(Model.avgDivisionend.ToString("N2")) %</strong></span> <br />
-                    <span>Average  Faculty Tansiq for the past 5 years: <strong>@Html.Label(Model.avgFacstart.ToString()) ~ @Html.Label(Model.avgFacstart.ToString()) %</strong></span> <br />
-                    <span>Yours: <strong>@Html.Label(Model.grade.ToString())%</strong></span>
+                    <span>Average Division Tansiq for the past 5 years: <strong>@Convert.ToString(Model.avgDivisionstart) ~ @Convert.ToString(Model.avgDivisionend) %</strong></span> <br />
+                    <span>Average  Faculty Tansiq for the past 5 years: <strong>@Convert.ToString(Model.avgFacstart) ~ @Convert.ToString(Model.avgFacend) %</strong></span> <br />
+                    <span>Yours: <strong>@Convert.ToString(Model.grade.ToString())%</strong></span>
                 </p>
             </fieldset>
             <div class="division-tansiq">
 
             </div>
+            </div>
+
+            <div class="w-100 mt-2 interests common">
+                <h6>Common Interests</h6>
+                <ul>
+                    @foreach (var r in Model.SearchInterests)
+                    {
+                        <li>@Html.Label(r.name)</li>
+                    }
+                </ul>
+            </div>
+            <div class="w-100 mt-2 interests">
+                <h6>Other Interests</h6>
+                <ul>
+
+
+                    @foreach (var i in Model.Interests)
+                    {
+                        <li>@Html.Label(i)</li>
+                    }
+                </ul>
+            </div>
+
+
+
+            <div class="w-100">
+                <a href="#" class="btn btn-sm-primary text-white bg-clr-secondary float-right mb-3">
+                    <i class="fas fa-star"></i>
+                    save
+                </a>
+            </div>
+
         </div>
-
-        <div class="w-100 mt-2 interests common">
-            <h6>Common Interests</h6>
-            <ul>
-                @foreach (var r in Model.SearchInterests)
-                {
-                    <li>@Html.Label(r.name)</li>
-                }
-            </ul>
-        </div>
-        <div class="w-100 mt-2 interests">
-            <h6>Other Interests</h6>
-            <ul>
-
-
-                @foreach (var i in Model.Interests)
-                {
-                    <li>@Html.Label(i)</li>
-                }
-            </ul>
-        </div>
-
-
-
-        <div class="w-100">
-            <button class="btn btn-sm-primary text-white bg-clr-secondary float-right">
-                <i class="fas fa-star"></i>
-                save
-            </button>
-        </div>
-
     </div>
-</div>

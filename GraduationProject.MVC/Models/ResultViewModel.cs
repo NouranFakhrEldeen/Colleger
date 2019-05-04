@@ -25,5 +25,6 @@ namespace GraduationProject.MVC.Models
         public int universityId { get; set; }
         public int divisionId { get; set; }
         public bool saved { get; set; }
+        public int likelihood { get; set; }
     }
 }
