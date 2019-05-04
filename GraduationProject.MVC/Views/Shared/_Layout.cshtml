@@ -35,35 +35,25 @@
                 </li>
 
                 @if (User.IsInRole("admin"))
-                { }
-                @*<li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dashboard
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="@Url.Action("Index", "Universities")">Universities</a>
-                <a class="dropdown-item" href="@Url.Action("Index", "Faculties")">Faculties</a>
-                <a class="dropdown-item" href="@Url.Action("Index", "Division")"> Division </a>
-                <a class="dropdown-item" href="@Url.Action("Index", "Interests")"> Interests </a>
-            </div>
-        </li>*@
+                {
 
-                <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("Index", "Dashboard")">Dashboard<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link clr-secondary" href="@Url.Action("Index", "Search")">Find me a college!<span class="sr-only">(current)</span></a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Index", "Dashboard")">Dashboard<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link clr-secondary" href="@Url.Action("Index", "Search")">Find me a college!<span class="sr-only">(current)</span></a>
+                    </li>
+                }
             </ul>
 
             @Html.Partial("_LoginPartial")
         </div>
     </nav>
     <div class="body-content">
-       
+
 
         @RenderBody()
-        
+
 
     </div>
     <footer class="text-light text-center text-capitalize bg-clr-primary footer mt-auto py-3">

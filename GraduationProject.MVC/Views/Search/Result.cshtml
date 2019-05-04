@@ -37,23 +37,23 @@
                                 <a href="#">
                                     <span class="">
                                         <i class="fas fa-university"></i>
-                                        @Html.Label( item.FacultyName)
+                                        @Html.Label(item.FacultyName)
                                     </span>
                                 </a>
                             </div>
                         </div>
 
                         <div class="w-100 mt-3 description">
-                            <p>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                            @Html.Label(item.Description)
                         </div>
 
                         <div class="w-100 mt-3 tansiqs">
                             <fieldset class="alert alert-success tansiq">
                                 <legend><strong>HIGHLY LIKELY <i class="fas fa-check"></i></strong></legend>
                                 <p class="m-0 p-0">
-                                    <span>Average Faculty Tansiq for the past 5 years: <strong>86.5 ~ 89.1 %</strong></span> <br />
-                                    <span>Average Division Tansiq for the past 5 years: <strong>87.9 ~ 91.3 %</strong></span> <br />
-                                    <span>Yours: <strong>90.6 %</strong></span>
+                                    <span>Average Division Tansiq for the past 5 years: <strong>@Html.Label(item.avgDivisionstart.ToString("N2")) ~ @Html.Label(item.avgDivisionend.ToString("N2")) %</strong></span> <br />
+                                    <span>Average  Faculty Tansiq for the past 5 years: <strong>@Html.Label(item.avgFacstart.ToString()) ~ @Html.Label(item.avgFacstart.ToString()) %</strong></span> <br />
+                                    <span>Yours: <strong>@Html.Label(item.grade.ToString())%</strong></span>
                                 </p>
                             </fieldset>
                             <div class="division-tansiq">
@@ -64,23 +64,21 @@
                         <div class="w-100 mt-2 interests common">
                             <h6>Common Interests</h6>
                             <ul>
-                                <li>Software Engineering</li>
-                                <li>Computer</li>
-                                <li>Graphic Design</li>
+                                @foreach (var r in item.SearchInterests)
+                                {
+                                    <li>@Html.Label(r.name)</li>
+                                }
                             </ul>
                         </div>
                         <div class="w-100 mt-2 interests">
                             <h6>Other Interests</h6>
                             <ul>
-                                <li>Software Engineering</li>
-                                <li>Computer</li>
-                                <li>Graphic Design</li>
-                                <li>Software Engineering</li>
-                                <li>Computer</li>
-                                <li>Graphic Design</li>
-                                <li>Software Engineering</li>
-                                <li>Computer</li>
-                                <li>Graphic Design</li>
+
+
+                                @foreach (var i in item.Interests)
+                                {
+                                    <li>@Html.Label(i)</li>
+                                }
                             </ul>
                         </div>
 

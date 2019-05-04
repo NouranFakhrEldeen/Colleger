@@ -11,10 +11,14 @@ namespace GraduationProject.MVC.Models
         public string FacultyName { get; set; }
         public string UniversityName { get; set; }
         public IEnumerable<string> Interests { get; set; }
-        public ICollection<int> SearchInterests { get; set; }
+        public List<Interest> SearchInterests { get; set; }
         public string Division { get; set; }
         public string Description { get; set; }
-        public double Average { get; set; }
+        public double avgDivisionstart { get; set; }
+        public double avgDivisionend { get; set; }
+
+        public double avgFacstart { get; set; }
+        public double avgFacend { get; set; }
         public double grade { get; set; }
 
     }
