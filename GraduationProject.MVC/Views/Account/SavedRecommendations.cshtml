@@ -3,7 +3,16 @@
     ViewBag.Title = "Saved Recommendations";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@foreach (var item in ViewBag.recommendationList)
-{
-    @Html.Partial("~/Views/Search/_Search_Result_Item.cshtml", (ResultViewModel)item)
-}
+
+<h2 class="w-100 text-center">Saved Recommendations</h2>
+
+<div class="container container-md-fluid">
+    <div class="row mt-2">
+        <div class="col-8 offset-2">
+            @foreach (var item in ViewBag.recommendationList)
+            {
+                @Html.Partial("~/Views/Search/_Search_Result_Item.cshtml", (ResultViewModel)item)
+            }
+            </div>
+</div>
+</div>

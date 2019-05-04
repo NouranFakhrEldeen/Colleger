@@ -6,8 +6,11 @@
 
         <ul class="navbar-nav">
             <li class="nav-item">
+                @Html.ActionLink("Saved Recommendations","SavedRecommendations", "Account",null,new { @class = "nav-link"})
+            </li>
+            <li class="nav-item">
                 @*<a class="nav-link" href=" @Url.Action("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage")"> </a>*@
-                @Html.ActionLink("Hello " + (User.Identity).GetUserName() + "!", "Index", "Tasks", routeValues: null, htmlAttributes: new { title = "Home", @class = "nav-link" })
+                @Html.ActionLink("Hello " + (User.Identity).GetUserName() + "!", "SavedRecommendations", "Account", routeValues: null, htmlAttributes: new { title = "Home", @class = "nav-link" })
 
 
             </li>

@@ -26,5 +26,6 @@ namespace GraduationProject.MVC.Models
         public int divisionId { get; set; }
         public bool saved { get; set; }
         public int likelihood { get; set; }
+        public double Fees { get; set; }
     }
 }

@@ -60,6 +60,8 @@ namespace GraduationProject.MVC.Services
 
             rvm.likelihood = getLikelihood(rec.SearchHistory.Grade, divisionTansiq.Startgrade, divisionTansiq.Endgrade);
 
+            rvm.Fees = rec.Division.Fees;
+
             return rvm;
         }
 

@@ -133,5 +133,14 @@ namespace GraduationProject.MVC.Controllers
             return View();
         }
 
+        public ActionResult SaveRecommendation(int id)
+        {
+            var rec = db.Recommendations.Where(r => r.Id == id).First();
+            int loggedInUserId = Int32.Parse(User.Identity.GetUserId());
+            rec.UserId = loggedInUserId;
+            db.SaveChanges();
+            return RedirectToAction("SavedRecommendations");
+        }
+
     }
 }
