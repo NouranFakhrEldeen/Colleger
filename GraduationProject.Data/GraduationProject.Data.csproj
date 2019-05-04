@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseContext.cs" />
+    <Compile Include="Entities\Courses.cs" />
     <Compile Include="Entities\Division.cs" />
     <Compile Include="Entities\Faculty.cs" />
     <Compile Include="Entities\Interest.cs" />
@@ -89,6 +90,10 @@
     <Compile Include="Migrations\201904271611061_v0.4.Designer.cs">
       <DependentUpon>201904271611061_v0.4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905040951480_v0.5.cs" />
+    <Compile Include="Migrations\201905040951480_v0.5.Designer.cs">
+      <DependentUpon>201905040951480_v0.5.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -108,6 +113,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904271611061_v0.4.resx">
       <DependentUpon>201904271611061_v0.4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905040951480_v0.5.resx">
+      <DependentUpon>201905040951480_v0.5.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
