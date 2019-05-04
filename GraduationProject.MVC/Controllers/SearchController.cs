@@ -37,10 +37,14 @@ namespace GraduationProject.MVC.Controllers
                 interstids.Add(Int32.Parse(b));
             }
 
-            var interestList = db.Interests.Where(a => interstids.Contains(a.Id));
+            var interestList = db.Interests.Where(a => interstids.Contains(a.Id)).ToList();
 
             var result = db.Tansiq.Where(a => a.SpecializationId == specializationId && a.Division.Faculty.University.Governorate == Governorate && a.Startgrade < Startgrade).ToList();
-            //var avg = db.Tansiq.Select(a=>a.Actual).Average();
+            var avgDivisionstart = db.Tansiq.Where(a => a.DivisionId != null).Select(a => a.Startgrade).Average();
+            var avgDivisionend = db.Tansiq.Where(a => a.DivisionId != null).Select(a => a.Endgrade).Average();
+            var avgFacstart = db.Tansiq.Where(a => a.FacultyId != null).Select(a => a.Startgrade).Average();
+            var avgFacend = db.Tansiq.Where(a => a.FacultyId != null).Select(a => a.Endgrade).Average();
+
             var result2 = result.Where(r => r.Division.Interests.Intersect(interestList).Any()).ToList();
            
             List<ResultViewModel> Results = new List<ResultViewModel>();
@@ -49,10 +53,15 @@ namespace GraduationProject.MVC.Controllers
             {
 
             Results.Add(new ResultViewModel { FacultyName = i.Division.Faculty.Name , UniversityName = i.Division.Faculty.University.Name,
-                Interests = i.Division.Interests.Select(a=>a.name) ,SearchInterests = interstids ,
+                Interests = i.Division.Interests.Select(a=>a.name) ,SearchInterests = interestList ,
                 Description = i.Division.Description ,
                 Division = i.Division.Name
-                , Average = 0 , grade = Startgrade  });
+                ,
+                avgDivisionstart = avgDivisionstart,
+                avgDivisionend = avgDivisionend,
+                avgFacstart= avgFacstart,
+                avgFacend= avgFacend,
+                grade = Startgrade  });
             }
 
 
@@ -61,18 +70,17 @@ namespace GraduationProject.MVC.Controllers
                 Governorate = Governorate,
                 SpecializationId = specializationId,
                 Grade = Startgrade,
-                Timestamp = DateTime.Now
+                Timestamp = DateTime.Now,
+                Interests = interestList
 
 
             };
+            
             db.SearchHistories.Add(searchHistory);
             db.SaveChanges();
 
-            foreach(var i in interestList)
-            {
-                searchHistory.Interests.Add(i);
-            }
-            db.SaveChanges();
+           
+            //db.SaveChanges();
             return View(Results);
         }
         public ActionResult RetrieveImage(int id)
