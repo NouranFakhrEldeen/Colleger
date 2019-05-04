@@ -1,4 +1,5 @@
 ﻿using GraduationProject.Data;
+using GraduationProject.Data.Entities;
 using GraduationProject.MVC.Models;
 using System;
 using System.Collections.Generic;
@@ -14,28 +15,40 @@ namespace GraduationProject.MVC.Services
         {
             DatabaseContext db = new DatabaseContext();
             var rec = db.Recommendations.Where(r => r.Id == recommendationId).First();
-            var rvm = new ResultViewModel()
+            ResultViewModel rvm = new ResultViewModel();
+
+            rvm.grade = rec.SearchHistory.Grade;
+            rvm.FacultyName = rec.Division.Faculty.Name;
+            rvm.UniversityName = rec.Division.Faculty.University.Name;
+            rvm.Division = rec.Division.Name;
+            rvm.Description = rec.Division.Description;
+            rvm.SearchInterests = rec.SearchHistory.Interests.ToList();
+
+            rvm.saved = saved;
+
+            rvm.facultyId = rec.Division.FacultyId;
+            rvm.divisionId = rec.DivisionId;
+            rvm.universityId = rec.Division.Faculty.UniversityId;
+            rvm.recommendationId = rec.Id;
+
+            var divisionTansiq = rec.Division.Tansiqs.Where(t => t.SpecializationId == rec.SearchHistory.SpecializationId).First();
+
+            rvm.avgDivisionstart = divisionTansiq.Startgrade;
+            rvm.avgDivisionend = divisionTansiq.Endgrade;
+            Tansiq facultyTansiq;
+            try
             {
-                grade = rec.SearchHistory.Grade,
-                FacultyName = rec.Division.Faculty.Name,
-                UniversityName = rec.Division.Faculty.University.Name,
-                Division = rec.Division.Name,
-                Description = rec.Division.Description,
-                SearchInterests = rec.SearchHistory.Interests.ToList(),
+                facultyTansiq = rec.Division.Faculty.Tansiqs.Where(t => t.SpecializationId == rec.SearchHistory.SpecializationId).First();
+            } catch (Exception e)
+            {
+                facultyTansiq = divisionTansiq;
+            }
 
-                saved = saved,
+            rvm.avgFacstart = facultyTansiq.Startgrade;
+            rvm.avgFacend = facultyTansiq.Endgrade;
+            var divIntIds = rec.Division.Interests.Select(i => i.Id).ToList();
+            rvm.Interests = rec.SearchHistory.Interests.Where(i => divIntIds.Contains(i.Id)).Select(i => i.name);
 
-                facultyId = rec.Division.FacultyId,
-                divisionId = rec.DivisionId,
-                universityId = rec.Division.Faculty.UniversityId,
-                recommendationId = rec.Id,
-
-                avgDivisionstart = rec.Division.Tansiqs.Where(t => t.SpecializationId == rec.SearchHistory.SpecializationId).First().Startgrade,
-                avgDivisionend = rec.Division.Tansiqs.Where(t => t.SpecializationId == rec.SearchHistory.SpecializationId).First().Endgrade,
-
-                avgFacstart = rec.Division.Faculty.Tansiqs.Where(t => t.SpecializationId == rec.SearchHistory.SpecializationId).First().Startgrade,
-                avgFacend = rec.Division.Faculty.Tansiqs.Where(t => t.SpecializationId == rec.SearchHistory.SpecializationId).First().Endgrade,
-            };
 
             return rvm;
         }

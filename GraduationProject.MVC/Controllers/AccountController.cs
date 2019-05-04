@@ -126,7 +126,8 @@ namespace GraduationProject.MVC.Controllers
 
         public ActionResult SavedRecommendations()
         {
-            var recs = db.Recommendations.Where(r => r.UserId == Int32.Parse(User.Identity.GetUserId())).Select(r => r.Id).ToList();
+            var loggedUserId = Int32.Parse(User.Identity.GetUserId());
+            var recs = db.Recommendations.Where(r => r.UserId == loggedUserId).Select(r => r.Id).ToList();
             var recsRVM = RecommendationExtractorService.getRecommendationVMListByIdList(recs, true);
             ViewBag.recommendationList = recsRVM;
             return View();
