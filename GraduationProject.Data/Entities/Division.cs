@@ -17,6 +17,7 @@ namespace GraduationProject.Data.Entities
         public string Description { get; set; }
         public string ExtraInfo { get; set; }
         public int Views { get; set; }
+        public double Fees { get; set; }
 
         [ForeignKey("Faculty")]
         public int FacultyId { get; set; }
@@ -25,6 +26,7 @@ namespace GraduationProject.Data.Entities
         public virtual ICollection<Tansiq> Tansiqs { get; set; }
         public virtual ICollection<Interest> Interests { get; set; }
 
+        public virtual ICollection<Courses> Courses { get; set; }
 
 
     }

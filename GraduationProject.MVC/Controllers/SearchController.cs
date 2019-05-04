@@ -37,7 +37,7 @@ namespace GraduationProject.MVC.Controllers
                 interstids.Add(Int32.Parse(b));
             }
 
-            var interestList = db.Interests.Where(a => interstids.Contains(a.Id)).ToList();
+            var interestList = db.Interests.Where(a => interstids.Contains(a.Id));
 
             var result = db.Tansiq.Where(a => a.SpecializationId == specializationId && a.Division.Faculty.University.Governorate == Governorate && a.Startgrade < Startgrade).ToList();
             //var avg = db.Tansiq.Select(a=>a.Actual).Average();
@@ -54,19 +54,25 @@ namespace GraduationProject.MVC.Controllers
                 Division = i.Division.Name
                 , Average = 0 , grade = Startgrade  });
             }
-            
+
+
             SearchHistory searchHistory = new SearchHistory()
             {
                 Governorate = Governorate,
                 SpecializationId = specializationId,
-                
                 Grade = Startgrade,
                 Timestamp = DateTime.Now
+
 
             };
             db.SearchHistories.Add(searchHistory);
             db.SaveChanges();
 
+            foreach(var i in interestList)
+            {
+                searchHistory.Interests.Add(i);
+            }
+            db.SaveChanges();
             return View(Results);
         }
         public ActionResult RetrieveImage(int id)
