@@ -27,7 +27,7 @@ namespace GraduationProject.MVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult Result(int specializationId, double Startgrade, string iii, string Governorate)
+        public ActionResult Result(int specializationId, double Startgrade, string iii, string Governorate , double Fees , string course)
         {
             var bb = iii.Split(',');
             var interstids = new List<int>();
@@ -36,20 +36,28 @@ namespace GraduationProject.MVC.Controllers
 
                 interstids.Add(Int32.Parse(b));
             }
+            var cc = course.Split(',');
+            var courseids = new List<int>();
+            foreach (var c in cc)
+            {
 
+                courseids.Add(Int32.Parse(c));
+            }
+            var courseList = db.Courses.Where(r => courseids.Contains(r.Id)).ToList();
             var interestList = db.Interests.Where(a => interstids.Contains(a.Id)).ToList();
 
-            var result = db.Tansiq.Where(a => a.SpecializationId == specializationId && a.Division.Faculty.University.Governorate == Governorate && a.Startgrade < Startgrade).ToList();
+            var result = db.Tansiq.Where(a => a.SpecializationId == specializationId && a.Startgrade < Startgrade ||a.Division.Faculty.University.Governorate == Governorate || a.Division.Fees < Fees).ToList();
             var avgDivisionstart = db.Tansiq.Where(a => a.DivisionId != null).Select(a => a.Startgrade).Average();
             var avgDivisionend = db.Tansiq.Where(a => a.DivisionId != null).Select(a => a.Endgrade).Average();
             var avgFacstart = db.Tansiq.Where(a => a.FacultyId != null).Select(a => a.Startgrade).Average();
             var avgFacend = db.Tansiq.Where(a => a.FacultyId != null).Select(a => a.Endgrade).Average();
 
-            var result2 = result.Where(r => r.Division.Interests.Intersect(interestList).Any()).ToList();
+            var Result = result.Where(r => r.Division.Interests.Intersect(interestList).Any()).ToList().
+             Where(n=>n.Division.Courses.Intersect(courseList).Any()).ToList();
            
             List<ResultViewModel> Results = new List<ResultViewModel>();
             
-            foreach(var i in result2)
+            foreach(var i in Result)
             {
 
             Results.Add(new ResultViewModel { FacultyName = i.Division.Faculty.Name , UniversityName = i.Division.Faculty.University.Name,
@@ -78,9 +86,13 @@ namespace GraduationProject.MVC.Controllers
             
             db.SearchHistories.Add(searchHistory);
             db.SaveChanges();
-
            
-            //db.SaveChanges();
+            foreach(var x in Result )
+            {
+
+                db.Recommendations.Add(new Recommendation { SearchHistoryId = searchHistory.Id, DivisionId = x.Division.Id});
+            }
+            db.SaveChanges();
             return View(Results);
         }
         public ActionResult RetrieveImage(int id)

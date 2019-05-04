@@ -25,6 +25,10 @@ namespace GraduationProject.Data.Migrations
             context.Universities.AddOrUpdate(new Entities.University() { Id = 1 ,Name = "Uni1" , City= "nasr city" , Governorate = "Cairo" , Description= "" , Street = "test" , Zipcode= null , Logo = null });
             context.Faculties.AddOrUpdate(new Entities.Faculty() { Id = 1, Name = "faculty1", UniversityId = 1, Description = null, logo = null, searchAppearancesCount = 1 });
             context.Division.AddOrUpdate(new Entities.Division() { Id = 1, Name = "Divison1", FacultyId = 1, Description = null });
+
+            context.Courses.AddOrUpdate(new Entities.Courses() { Id = 1, Name = "English" });
+            context.Courses.AddOrUpdate(new Entities.Courses() { Id = 2, Name = "Art" });
+
         }
     }
 }
