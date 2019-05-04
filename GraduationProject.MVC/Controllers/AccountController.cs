@@ -12,6 +12,7 @@ using Microsoft.Owin.Security;
 using System.Security.Claims;
 using Microsoft.AspNet.Identity;
 using GraduationProject.MVC.Models;
+using GraduationProject.MVC.Services;
 
 namespace GraduationProject.MVC.Controllers
 {
@@ -121,6 +122,14 @@ namespace GraduationProject.MVC.Controllers
                 }, identity);
 
 
+        }
+
+        public ActionResult SavedRecommendations()
+        {
+            var recs = db.Recommendations.Where(r => r.UserId == Int32.Parse(User.Identity.GetUserId())).Select(r => r.Id).ToList();
+            var recsRVM = RecommendationExtractorService.getRecommendationVMListByIdList(recs, true);
+            ViewBag.recommendationList = recsRVM;
+            return View();
         }
 
     }

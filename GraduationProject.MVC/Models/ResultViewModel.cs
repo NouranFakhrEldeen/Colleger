@@ -20,6 +20,10 @@ namespace GraduationProject.MVC.Models
         public double avgFacstart { get; set; }
         public double avgFacend { get; set; }
         public double grade { get; set; }
-
+        public int recommendationId { get; set; }
+        public int facultyId { get; set; }
+        public int universityId { get; set; }
+        public int divisionId { get; set; }
+        public bool saved { get; set; }
     }
 }
