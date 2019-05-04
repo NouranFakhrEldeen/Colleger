@@ -51,6 +51,7 @@
     let $eltGovernorateSelector = $('[GovernorateSelector]');
     if ($eltGovernorateSelector) {
         const govtList = [
+            "",
             "Alexandria",
             "Aswan",
             "Asyut",

@@ -70,6 +70,13 @@
                     <input type="text" name="courses" class="form-control" CoursesSelector placeholder="Ex: English, Art...">
                 </div>
             </div>
+            <div class="form-group row">
+                @Html.LabelFor(model => model.Fees, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Fees, new { htmlAttributes = new { @class = "form-control", type = "number" } })
+                    @Html.ValidationMessageFor(model => model.Fees, "", new { @class = "text-danger" })
+                </div>
+            </div>
             <tansiq></tansiq>
 
             <!-- submit -->
