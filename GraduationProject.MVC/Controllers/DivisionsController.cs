@@ -51,32 +51,46 @@ namespace GraduationProject.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create( Division division , string Interests)
+        public ActionResult Create( Division division , string Interests, string courses)
         {
-            //if (ModelState.IsValid)
-            //{
-            var bb = Interests.Split(',');
+            // adding interests from a string of ids
+            var interest = Interests.Split(',');
             var InterestsL = new List<int>();
-            foreach (var b in bb)
+            foreach (var b in interest)
             {
-
                 InterestsL.Add(Int32.Parse(b));
             }
             var lIntenerts = db.Interests.Where(i => InterestsL.Contains(i.Id));
-                db.Division.Add(division);
+
+            // adding courses from a string of ids
+            var course = courses.Split(',');
+            var coursesL = new List<int>();
+            foreach(var b in course)
+            {
+                coursesL.Add(Int32.Parse(b));
+            }
+            var lCourses = db.Courses.Where(i => coursesL.Contains(i.Id));
+
+            // saving the division to database
+            db.Division.Add(division);
             db.SaveChanges();
 
+            // add each interest to division
             foreach (var i in lIntenerts)
             {
                 division.Interests.Add(i);
             }
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            //}
 
-            //ViewBag.UniversityId = new SelectList(db.Universities, "Id", "Name");
+            // add each course into division
+            foreach(var i in lCourses)
+            {
+                division.Courses.Add(i);
+            }
 
-            //return View(division);
+            // presist db changes
+            db.SaveChanges();
+            return RedirectToAction("Index");
+
         }
 
         // GET: Division/Edit/5

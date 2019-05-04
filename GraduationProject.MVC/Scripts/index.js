@@ -25,24 +25,24 @@
     }
 
     let $eltCoursesSelector = $('[CoursesSelector]');
-    if ($eltCoursestSelector) {
+    if ($eltCoursesSelector) {
         const courses = new Bloodhound({
-            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('Name'),
             queryTokenizer: Bloodhound.tokenizers.whitespace,
             prefetch: "/api/courses"
         });
-        interests.initialize();
+        courses.initialize();
 
         $eltCoursesSelector.tagsinput({
             itemValue: 'Id',
-            itemText: 'name',
+            itemText: 'Name',
 
             typeaheadjs: {
                 name: 'coursesInput',
-                displayKey: 'name',
+                displayKey: 'Name',
                 highlight: true,
                 hint: false,
-                source: interests.ttAdapter()
+                source: courses.ttAdapter()
             }
         });
     }

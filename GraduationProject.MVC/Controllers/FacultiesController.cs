@@ -155,7 +155,7 @@ namespace GraduationProject.MVC.Controllers
         }
 
         [HttpGet]
-        [ActionName("API")]
+        [Route("~/api/faculties/{id}")]
         public ActionResult getAllByUniversityId(int id)
         {
             var faculties = db.Faculties.Where(i => i.UniversityId == id).Select(i => new { i.Id, i.Name });

@@ -25,7 +25,6 @@ namespace GraduationProject.Data.Entities
 
         public virtual ICollection<Tansiq> Tansiqs { get; set; }
         public virtual ICollection<Interest> Interests { get; set; }
-
         public virtual ICollection<Courses> Courses { get; set; }
 
 

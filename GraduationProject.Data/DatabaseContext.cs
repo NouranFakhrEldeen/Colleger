@@ -36,5 +36,16 @@ namespace GraduationProject.Data
         public System.Data.Entity.DbSet<GraduationProject.Data.Entities.Specialization> Specializations { get; set; }
         public System.Data.Entity.DbSet<GraduationProject.Data.Entities.Student> Students { get; set; }
 
+        public System.Data.Entity.DbSet<GraduationProject.Data.Entities.Courses> Courses { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Division>().HasMany<Courses>(s => s.Courses)
+                .WithMany(c => c.Divisions)
+                .Map(cs => {
+                    cs.ToTable("CoursesDivisions");
+                });
+        }
     }
 }

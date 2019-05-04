@@ -15,64 +15,70 @@
         {
             @Html.AntiForgeryToken()
 
-            <div class="form bg-light rounded-lg border p-3">
-                <h4 class="text-center py-1 my-1">Division</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group row">
-                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    @Html.LabelFor(model => model.ExtraInfo, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.ExtraInfo, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.ExtraInfo, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-
-                <div class="form-group row">
-                    <label for="UniversityId" class="control-label col-md-2">University</label>
-                    <div class="col-md-10">
-                        @Html.DropDownList("UniversityId", null, htmlAttributes: new { @class = "form-control" })
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="FacultyId" class="control-label col-md-2">Faculty</label>
-                    <div class="col-md-10">
-                        <select class="form-control" name="FacultyId" id="FacultyId"></select>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="interests" class="control-label col-md-2">Interests</label>
-                    <div class="input-group col-md-10">
-                        <input type="text" name="interests" class="form-control" InterestSelector placeholder="Ex: Drawaing, Litrature...">
-                    </div>
-                </div>
-
-                <tansiq></tansiq>
-
-                <!-- submit -->
-                <div class="form-group row">
-                    <div class="col-sm-12 col-md-6 offset-md-3 col-lg-4 offset-lg-4">
-                        <input type="submit" value="Create" class="btn btn-lg btn-primary bg-clr-primary text-center w-100" />
-                    </div>
+        <div class="form bg-light rounded-lg border p-3">
+            <h4 class="text-center py-1 my-1">Division</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group row">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                 </div>
             </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.ExtraInfo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.ExtraInfo, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ExtraInfo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label for="UniversityId" class="control-label col-md-2">University</label>
+                <div class="col-md-10">
+                    @Html.DropDownList("UniversityId", null, htmlAttributes: new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="FacultyId" class="control-label col-md-2">Faculty</label>
+                <div class="col-md-10">
+                    <select class="form-control" name="FacultyId" id="FacultyId"></select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="interests" class="control-label col-md-2">Interests</label>
+                <div class="input-group col-md-10">
+                    <input type="text" name="interests" class="form-control" InterestSelector placeholder="Ex: Drawaing, Litrature...">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="courses" class="control-label col-md-2">Courses</label>
+                <div class="input-group col-md-10">
+                    <input type="text" name="courses" class="form-control" CoursesSelector placeholder="Ex: English, Art...">
+                </div>
+            </div>
+            <tansiq></tansiq>
+
+            <!-- submit -->
+            <div class="form-group row">
+                <div class="col-sm-12 col-md-6 offset-md-3 col-lg-4 offset-lg-4">
+                    <input type="submit" value="Create" class="btn btn-lg btn-primary bg-clr-primary text-center w-100" />
+                </div>
+            </div>
+        </div>
         }
     </div>
         <div class="row my-2">
