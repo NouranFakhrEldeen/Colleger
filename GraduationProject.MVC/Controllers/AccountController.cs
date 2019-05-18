@@ -84,7 +84,7 @@ namespace GraduationProject.MVC.Controllers
                 db.Users.Add(entity);
                 db.SaveChanges();
                 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Login", "Account");
             }
             return View(user);
         }
@@ -104,7 +104,8 @@ namespace GraduationProject.MVC.Controllers
                 new Claim(ClaimTypes.NameIdentifier , user.Id.ToString()),
                 new Claim (ClaimTypes.Name , user.Firstname),
                 new Claim(ClaimTypes.Email, user.Email),
-                
+                new Claim(ClaimTypes.Role, (user.Role).ToString())
+
 
         };
             return userCms;
