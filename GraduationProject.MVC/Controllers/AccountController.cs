@@ -50,6 +50,7 @@ namespace GraduationProject.MVC.Controllers
             }
 
             Authenticate(user, false);
+            
             return RedirectToAction("Index", "Home");
         }
 
@@ -81,9 +82,17 @@ namespace GraduationProject.MVC.Controllers
                     
 
                 };
+
                 db.Users.Add(entity);
                 db.SaveChanges();
-                
+
+                //return RedirectToAction("Login", "Account");
+                var model = new LoginViewModel
+                {
+                    Email = entity.Email,
+                    Password = entity.Password
+                };
+                Login(model);
                 return RedirectToAction("Index", "Home");
             }
             return View(user);
@@ -104,7 +113,8 @@ namespace GraduationProject.MVC.Controllers
                 new Claim(ClaimTypes.NameIdentifier , user.Id.ToString()),
                 new Claim (ClaimTypes.Name , user.Firstname),
                 new Claim(ClaimTypes.Email, user.Email),
-                
+                new Claim(ClaimTypes.Role, (user.Role).ToString())
+
 
         };
             return userCms;
@@ -122,6 +132,7 @@ namespace GraduationProject.MVC.Controllers
                 }, identity);
 
 
+            Session["user"] = user.Id;
         }
 
         public ActionResult SavedRecommendations()
@@ -135,11 +146,20 @@ namespace GraduationProject.MVC.Controllers
 
         public ActionResult SaveRecommendation(int id)
         {
+            if(Session["user"] == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            else
+            {
+
+            
             var rec = db.Recommendations.Where(r => r.Id == id).First();
             int loggedInUserId = Int32.Parse(User.Identity.GetUserId());
             rec.UserId = loggedInUserId;
             db.SaveChanges();
             return RedirectToAction("SavedRecommendations");
+            }
         }
 
     }
